@@ -1,0 +1,136 @@
+<form class="ims-sheet ims-extra" autocomplete="off">
+  <header class="ims-extra-header compact">
+    <img src="{{actor.img}}" data-edit="img" alt="">
+    <div class="ims-extra-id">
+      <input class="ims-title-input" name="name" value="{{actor.name}}">
+      <div class="ims-extra-meta">
+        <input name="system.rol" value="{{system.rol}}" placeholder="Rol">
+        <input name="system.bando" value="{{system.bando}}" placeholder="Bando">
+      </div>
+    </div>
+    <div class="ims-extra-actions">
+      <button type="button" title="Iniciativa" data-roll-initiative><i class="fas fa-forward"></i></button>
+      <button type="button" title="Ataque" data-help-type="rule" data-help-key="ataque" data-roll-attack><i class="fas fa-dice-six"></i></button>
+      <button type="button" title="Reservar" data-roll-reserve><i class="fas fa-hourglass-half"></i></button>
+      <button type="button" title="Daño" data-damage><i class="fas fa-kit-medical"></i></button>
+      <button type="button" title="Daño reglado" data-help-type="rule" data-help-key="danoReglado" data-hazard-damage><i class="fas fa-triangle-exclamation"></i></button>
+      <button type="button" title="Curar" data-heal><i class="fas fa-hand-holding-medical"></i></button>
+    </div>
+  </header>
+
+  <section class="ims-body single ims-extra-body">
+    <section class="ims-extra-top">
+      <div class="ims-extra-card ims-extra-attrs">
+        <h3>Atributos</h3>
+        <div class="ims-extra-attr-grid">
+          {{#each atributos}}
+          <label data-help-type="attribute" data-help-key="{{key}}"><span>{{short}}</span><input type="number" name="system.atributos.{{key}}" value="{{value}}" step="1"></label>
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="ims-extra-card ims-extra-values">
+        <h3>Valores</h3>
+        <div class="ims-extra-value-grid">
+          <label data-help-type="rule" data-help-key="bemoles"><span>Bemoles</span><input type="number" name="system.bemoles.valor" value="{{system.bemoles.valor}}"></label>
+          <label data-help-type="rule" data-help-key="nervio"><span>Nervio</span><input type="number" name="system.nervio.valor" value="{{system.nervio.valor}}"></label>
+          <label><span>Salud</span><input type="number" name="system.salud.valor" value="{{system.salud.valor}}"></label>
+          <label><span>Max</span><input type="number" name="system.salud.max" value="{{system.salud.max}}"></label>
+        </div>
+        <div class="ims-extra-checks">
+          <label class="check"><input type="checkbox" name="system.bemoles.manual" {{imsChecked system.bemoles.manual}}> Fijar Bemoles</label>
+          <label class="check"><input type="checkbox" name="system.nervio.manual" {{imsChecked system.nervio.manual}}> Fijar Nervio</label>
+          <label class="check"><input type="checkbox" name="system.combate.sorprendido" {{imsChecked system.combate.sorprendido}}> Sorpresa</label>
+        </div>
+      </div>
+
+      <div class="ims-extra-card ims-extra-attack">
+        <h3>Ataque</h3>
+        <div class="ims-effective-attack {{#if effectiveAttack.equipped}}equipped{{/if}}">
+          <b>{{effectiveAttack.name}}</b>
+          <span>{{effectiveAttack.source}}</span>
+          <small>{{effectiveAttack.skillLabel}} · Daño {{effectiveAttack.damage}} + {{effectiveAttack.attrLabel}} · Ini +{{effectiveAttack.initiative}}</small>
+        </div>
+        <div class="ims-extra-attack-grid">
+          <label>Tipo
+            <select name="system.ataque.tipo" data-extra-attack-type>
+              {{#each attackTypes}}<option value="{{key}}" {{imsSelected key ../system.ataque.tipo}}>{{label}}</option>{{/each}}
+            </select>
+          </label>
+          <label>Habilidad
+            <select name="system.ataque.habilidad">
+              {{#each skillOptions}}<option value="{{key}}" {{imsSelected key ../system.ataque.habilidad}}>{{label}} ({{attrLabel}})</option>{{/each}}
+            </select>
+          </label>
+          <label class="span-2">Nombre<input name="system.ataque.nombre" value="{{system.ataque.nombre}}"></label>
+          <label>Daño<input type="number" name="system.ataque.dano" value="{{system.ataque.dano}}"></label>
+        </div>
+      </div>
+    </section>
+
+    <section class="ims-number-section ims-health ims-extra-health compact" data-help-type="rule" data-help-key="salud">
+      <h2>Salud</h2>
+      <div class="ims-health-track" style="{{healthGridStyle}}">
+        {{#each healthTrack}}
+        <button type="button" data-help-type="rule" data-help-key="salud" data-health="{{value}}" class="zone-{{zone}} {{#if active}}active{{/if}} {{#if threshold}}threshold{{/if}}">
+          <span></span><b>{{value}}</b>
+        </button>
+        {{/each}}
+      </div>
+    </section>
+
+    <section class="ims-extra-main">
+      <section class="ims-extra-card ims-extra-skills">
+        <h3>Habilidades</h3>
+        <div class="ims-skill-table compact">
+          {{#each habilidades}}
+          <div class="ims-skill-row">
+            <button type="button" data-help-type="skill" data-help-key="{{key}}" data-roll-skill="{{key}}">{{label}} ({{attrLabel}})</button>
+            <div class="ims-dots">
+              {{#each dots}}
+              <button type="button" class="ims-dot {{#if active}}active{{/if}}" data-skill-dot="{{../key}}" data-value="{{value}}"></button>
+              {{/each}}
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </section>
+
+      <section class="ims-inventory ims-extra-inventory compact" data-help-type="section" data-help-key="pertenencias">
+        <header>
+          <h2>Equipo</h2>
+          <div>
+            <button type="button" title="Crear equipo" data-item-create="equipo"><i class="fas fa-plus"></i><i class="fas fa-suitcase"></i></button>
+            <button type="button" title="Crear arma" data-item-create="arma"><i class="fas fa-plus"></i><i class="fas fa-gavel"></i></button>
+            <button type="button" title="Crear talento" data-item-create="talento"><i class="fas fa-plus"></i><i class="fas fa-star"></i></button>
+          </div>
+        </header>
+        {{#if equipmentNotes.length}}
+        <p class="ims-equipped-note">Equipado: {{#each equipmentNotes}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
+        {{/if}}
+        {{#each itemsByType}}
+        <h3>{{@key}}</h3>
+        <ol>
+          {{#each this}}
+          <li class="item {{#if system.equipado}}equipped{{/if}}" data-item-id="{{id}}">
+            <img src="{{img}}" alt="">
+            <span>{{name}}</span>
+            <button type="button" data-item-equip title="Equipar"><i class="fas fa-shirt"></i></button>
+            <button type="button" data-item-use title="Usar"><i class="fas fa-dice-six"></i></button>
+            <button type="button" data-item-edit title="Editar"><i class="fas fa-pen"></i></button>
+            <button type="button" data-item-delete title="Borrar"><i class="fas fa-trash"></i></button>
+          </li>
+          {{else}}
+          <li class="ims-empty-row">Sin elementos.</li>
+          {{/each}}
+        </ol>
+        {{/each}}
+      </section>
+    </section>
+
+    <section class="ims-notes two compact">
+      <label>Descripción<textarea name="system.descripcion">{{system.descripcion}}</textarea></label>
+      <label>Notas<textarea name="system.notas">{{system.notas}}</textarea></label>
+    </section>
+  </section>
+</form>

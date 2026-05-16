@@ -1,0 +1,147 @@
+{
+  "Actor": {
+    "types": ["jubilado", "extra"],
+    "jubilado": {
+      "datos": {
+        "jugador": "",
+        "lugarNacimiento": "",
+        "anos": "",
+        "antiguaProfesion": "",
+        "partido": "",
+        "familiaNietos": "",
+        "arquetipo": "",
+        "talento": "",
+        "vidaMilagros": "",
+        "pertenencias": "",
+        "relaciones": ""
+      },
+      "atributos": {
+        "cac": 0,
+        "gra": 2,
+        "pre": 4,
+        "rob": 6
+      },
+      "habilidades": {},
+      "salud": {
+        "valor": 18,
+        "max": 18
+      },
+      "jamacuco": {
+        "valor": 10,
+        "primeraTirada": false,
+        "umbrales": {
+          "15": false,
+          "10": false,
+          "6": false,
+          "3": false,
+          "1": false
+        }
+      },
+      "yayopoints": {
+        "valor": 4,
+        "inicial": 4
+      },
+      "achaques": {
+        "mayor": "",
+        "menor": "",
+        "menorUsado": false
+      },
+      "flashback": {
+        "usado": false,
+        "nota": ""
+      },
+      "combate": {
+        "armaIniciativa": "sinArmas",
+        "ataque": "sinArmas",
+        "sorprendido": false
+      },
+      "estado": {
+        "inconsciente": false,
+        "muerto": false,
+        "notas": ""
+      }
+    },
+    "extra": {
+      "descripcion": "",
+      "bando": "",
+      "rol": "",
+      "atributos": {
+        "cac": 0,
+        "gra": 0,
+        "pre": 0,
+        "rob": 0
+      },
+      "habilidades": {},
+      "salud": {
+        "valor": 10,
+        "max": 10
+      },
+      "bemoles": {
+        "valor": 7,
+        "manual": false
+      },
+      "nervio": {
+        "valor": 3,
+        "manual": false
+      },
+      "ataque": {
+        "nombre": "Tollina",
+        "habilidad": "tollinas",
+        "tipo": "sinArmas",
+        "dano": 2
+      },
+      "combate": {
+        "sorprendido": false
+      },
+      "notas": ""
+    }
+  },
+  "Item": {
+    "types": ["equipo", "arma", "talento", "arquetipo"],
+    "equipo": {
+      "descripcion": "",
+      "cantidad": 1,
+      "uso": "",
+      "equipado": false,
+      "automatismo": "",
+      "habilidadUso": "",
+      "dificultadUso": 8
+    },
+    "arma": {
+      "tipo": "sinArmas",
+      "habilidad": "tollinas",
+      "danoBase": 2,
+      "atributoDano": "rob",
+      "iniciativa": 0,
+      "descripcion": "",
+      "equipado": false,
+      "automatismo": ""
+    },
+    "talento": {
+      "descripcion": "",
+      "usos": {
+        "valor": 1,
+        "max": 1
+      },
+      "equipado": false,
+      "automatismo": "",
+      "habilidadUso": "",
+      "dificultadUso": 8
+    },
+    "arquetipo": {
+      "arquetipoKey": "",
+      "genero": "",
+      "partido": "",
+      "atributos": {},
+      "habilidades": {},
+      "habilidades3d": [],
+      "habilidades2d": [],
+      "yayopoints": 0,
+      "saludBase": 0,
+      "jamacuco": 0,
+      "talentoNombre": "",
+      "talento": "",
+      "descripcion": ""
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "IMSERSO.HojaJubilado": "Ficha de Jubilado",
+  "IMSERSO.HojaExtra": "Ficha de Extra",
+  "IMSERSO.HojaItem": "Ficha de Item",
+  "TYPES.Actor.jubilado": "Jubilado",
+  "TYPES.Actor.extra": "Extra",
+  "TYPES.Item.equipo": "Equipo",
+  "TYPES.Item.arma": "Arma",
+  "TYPES.Item.talento": "Talento"
+}

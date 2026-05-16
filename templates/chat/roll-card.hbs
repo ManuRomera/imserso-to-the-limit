@@ -1,0 +1,24 @@
+<div class="ims-chat-card ims-roll {{cssClass}}">
+  <header>
+    <h3>{{label}}</h3>
+    <strong>{{title}}</strong>
+  </header>
+  <div class="ims-roll-total">{{total}}</div>
+  <p>{{flavor}} · DF {{dificultad}}</p>
+  <div class="ims-dice-faces">
+    {{#each diceFaces}}<span>{{this}}</span>{{/each}}
+  </div>
+  {{#if rerollBreakdown}}
+  <div class="ims-reroll-breakdown">
+    <span>Guardados: {{#each keptFaces}}<b>{{this}}</b>{{/each}}</span>
+    <span>Repetidos: {{#each rerolledFaces}}<b>{{this}}</b>{{/each}}</span>
+  </div>
+  {{/if}}
+  <details>
+    <summary>{{formula}}</summary>
+    {{{tooltip}}}
+  </details>
+  {{#if canReroll}}
+  <button type="button" class="ims-chat-action" data-ims-action="reroll-yayo">Gastar 1 yayopoint y repetir</button>
+  {{/if}}
+</div>

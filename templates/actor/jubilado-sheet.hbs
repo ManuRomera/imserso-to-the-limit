@@ -1,0 +1,244 @@
+<form class="ims-sheet ims-jubilado" autocomplete="off">
+  <nav class="ims-tabs" data-group="primary">
+    <a class="item" data-tab="ficha"><i class="fas fa-id-card"></i> Ficha</a>
+    {{#if isGM}}
+    <a class="item" data-tab="automatismos"><i class="fas fa-dice-six"></i> Automatismos</a>
+    {{/if}}
+    <a class="item" data-tab="equipo"><i class="fas fa-suitcase"></i> Pertenencias</a>
+    <a class="item" data-tab="notas"><i class="fas fa-book-open"></i> Vida</a>
+  </nav>
+
+  <section class="ims-body">
+    <div class="tab ims-tab-panel" data-group="primary" data-tab="ficha">
+      <main class="ims-paper">
+        <header class="ims-paper-header">
+          <div class="ims-logo-block">
+            <div class="ims-logo-mark">IMSERSO</div>
+            <div class="ims-logo-script">to the limit</div>
+          </div>
+          <div class="ims-paper-headline">
+          <section class="ims-number-section ims-data-grid" data-help-type="section" data-help-key="datos">
+            <h2>1. DATOS DE LA PERSONA SOLICITANTE</h2>
+            <label class="span-2">NOMBRE DEL JUGADOR<input name="system.datos.jugador" value="{{system.datos.jugador}}"></label>
+            <label class="span-2">NOMBRE DEL PJ<input name="name" value="{{actor.name}}"></label>
+            <label>LUGAR DE NACIMIENTO<input name="system.datos.lugarNacimiento" value="{{system.datos.lugarNacimiento}}"></label>
+            <label>AÑOS<input name="system.datos.anos" value="{{system.datos.anos}}"></label>
+            <label>ANTIGUA PROFESIÓN (+3)<input name="system.datos.antiguaProfesion" value="{{system.datos.antiguaProfesion}}"></label>
+            <label>PARTIDO<input name="system.datos.partido" value="{{system.datos.partido}}"></label>
+            <label class="span-2 tall">FAMILIA Y NIETOS<textarea name="system.datos.familiaNietos">{{system.datos.familiaNietos}}</textarea></label>
+          </section>
+          <div class="ims-photo-frame">
+            <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" alt="Fotografia">
+          </div>
+          </div>
+        </header>
+
+        <section class="ims-midline">
+          <div class="ims-attr-grid">
+            {{#each atributos}}
+            <label data-help-type="attribute" data-help-key="{{key}}">
+              <span>{{short}}</span>
+              <input type="number" name="system.atributos.{{key}}" value="{{value}}" step="2">
+            </label>
+            {{/each}}
+          </div>
+          <div class="ims-stamp" data-help-type="rule" data-help-key="yayopoints">
+            <span>Yayopoints</span>
+            <div class="ims-yayo-control">
+              <button type="button" data-spend-yayo title="Bajar yayopoints"><i class="fas fa-minus"></i></button>
+              <input type="number" name="system.yayopoints.valor" value="{{system.yayopoints.valor}}" title="Yayopoints actuales">
+              <b>/</b>
+              <input type="number" name="system.yayopoints.inicial" value="{{system.yayopoints.inicial}}" title="Yayopoints iniciales o máximos">
+              <button type="button" data-gain-yayo title="Subir yayopoints"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+          <div class="ims-bemoles" data-help-type="rule" data-help-key="bemoles">
+            <strong data-help-type="rule" data-help-key="bemoles">Bemoles</strong>
+            <b>{{system.bemoles}}</b>
+            <i></i>
+            <strong data-help-type="rule" data-help-key="nervio">Nervio</strong>
+            <b>{{system.nervio}}</b>
+          </div>
+        </section>
+
+        <section class="ims-number-section ims-lines ims-archetype-panel" data-help-type="section" data-help-key="arquetipos">
+          <label>
+            <strong>2. ARQUETIPO:</strong>
+            <select name="system.datos.arquetipo" data-archetype-select>
+              <option value="">Libre / sin arquetipo</option>
+              {{#each arquetipos}}
+              <option value="{{name}}" {{imsSelected name ../system.datos.arquetipo}}>{{name}} · {{genero}}</option>
+              {{/each}}
+            </select>
+          </label>
+          {{#if system.datos.trajeHeroico}}
+          <label>
+            <strong>TRAJE / HÉROE:</strong>
+            <input name="system.datos.trajeHeroico" value="{{system.datos.trajeHeroico}}">
+          </label>
+          <label>
+            <strong>ESTADO:</strong>
+            <input name="system.datos.estadoAventura" value="{{system.datos.estadoAventura}}">
+          </label>
+          {{/if}}
+          <button type="button" class="ims-action-button" data-apply-archetype><i class="fas fa-stamp"></i> Aplicar arquetipo</button>
+          <label class="span-2">
+            <strong>3. TALENTO:</strong>
+            <textarea name="system.datos.talento">{{system.datos.talento}}</textarea>
+          </label>
+        </section>
+
+        <section class="ims-number-section">
+          <h2>4. HABILIDADES</h2>
+          <div class="ims-skill-table">
+            {{#each habilidades}}
+            <div class="ims-skill-row">
+              <button type="button" data-help-type="skill" data-help-key="{{key}}" data-roll-skill="{{key}}">{{label}} ({{attrLabel}})</button>
+              <div class="ims-dots" aria-label="{{dados}} dados">
+                {{#each dots}}
+                <button type="button" class="ims-dot {{#if active}}active{{/if}}" data-skill-dot="{{../key}}" data-value="{{value}}"></button>
+                {{/each}}
+              </div>
+            </div>
+            {{/each}}
+            <div class="ims-skill-note">CADA CÍRCULO MARCADO ES 1D EN LA HABILIDAD</div>
+          </div>
+        </section>
+
+        <section class="ims-number-section ims-aches" data-help-type="rule" data-help-key="achaques">
+          <label><strong>ACHAQUE MAYOR</strong> (-1D, +1 YAYOPOINT; SIN LÍMITE):<input name="system.achaques.mayor" value="{{system.achaques.mayor}}"></label>
+          <label><strong>ACHAQUE MENOR</strong> (REPETICIÓN NORMAL; SOLO UNA VEZ POR PARTIDA):<input name="system.achaques.menor" value="{{system.achaques.menor}}"></label>
+        </section>
+
+        <section class="ims-number-section ims-health" data-help-type="rule" data-help-key="salud">
+          <h2>5. SALUD</h2>
+          <div class="ims-health-zone-labels" style="{{healthGridStyle}}">
+            {{#each healthZones}}<span class="{{class}}" style="{{style}}">{{label}}</span>{{/each}}
+          </div>
+          <div class="ims-health-track" style="{{healthGridStyle}}">
+            {{#each healthTrack}}
+            <button type="button" data-help-type="rule" data-help-key="salud" data-health="{{value}}" class="zone-{{zone}} {{#if active}}active{{/if}} {{#if threshold}}threshold{{/if}} {{#if crossed}}crossed{{/if}}">
+              {{#if threshold}}<em>{{thresholdLabel}}</em>{{/if}}
+              <span></span><b>{{value}}</b>
+            </button>
+            {{/each}}
+          </div>
+          <div class="ims-jamacuco-row">
+            <label data-help-type="rule" data-help-key="jamacuco">VALOR DE JAMACUCO<input type="number" name="system.jamacuco.valor" value="{{system.jamacuco.valor}}"></label>
+            <label class="check">PRIMERA TIRADA DE JAMACUCO <input type="checkbox" name="system.jamacuco.primeraTirada" {{imsChecked system.jamacuco.primeraTirada}}></label>
+            <button type="button" data-roll-jamacuco><i class="fas fa-heart-pulse"></i> Tirar Jamacuco</button>
+            <em>{{penaltyLabel}}</em>
+          </div>
+        </section>
+
+        <section class="ims-number-section ims-text-box" data-help-type="section" data-help-key="pertenencias">
+          <h2>6. PERTENENCIAS</h2>
+          <div class="ims-quick-inventory">
+            {{#each itemsFlat}}
+            <div class="item ims-quick-item {{#if system.equipado}}equipped{{/if}}" data-item-id="{{id}}">
+              <img src="{{img}}" alt="">
+              <span>{{name}}</span>
+              <small>{{type}}</small>
+              <button type="button" data-item-equip title="Equipar"><i class="fas fa-shirt"></i></button>
+              <button type="button" data-item-use title="Usar"><i class="fas fa-dice-six"></i></button>
+              <button type="button" data-item-chat title="Enviar al chat"><i class="fas fa-comment"></i></button>
+              <button type="button" data-item-edit title="Editar"><i class="fas fa-pen"></i></button>
+            </div>
+            {{else}}
+            <p class="ims-empty-inventory">Arrastra aqui equipo, armas o talentos.</p>
+            {{/each}}
+          </div>
+          {{#if equipmentNotes.length}}
+          <p class="ims-equipped-note">Equipado: {{#each equipmentNotes}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
+          {{/if}}
+          <textarea name="system.datos.pertenencias" placeholder="Notas sueltas de pertenencias">{{system.datos.pertenencias}}</textarea>
+        </section>
+
+        <section class="ims-number-section ims-text-box">
+          <h2>7. VIDA Y MILAGROS</h2>
+          <textarea name="system.datos.vidaMilagros">{{system.datos.vidaMilagros}}</textarea>
+        </section>
+      </main>
+    </div>
+
+    {{#if isGM}}
+    <div class="tab ims-tab-panel ims-auto" data-group="primary" data-tab="automatismos">
+      <section class="ims-toolbar-band">
+        <button type="button" data-roll-initiative><i class="fas fa-forward"></i> Iniciativa</button>
+        <button type="button" data-help-type="rule" data-help-key="ataque" data-roll-attack><i class="fas fa-burst"></i> Ataque rápido</button>
+        <button type="button" data-roll-reserve><i class="fas fa-hourglass-half"></i> Reservar</button>
+        <button type="button" data-roll-pursuit><i class="fas fa-person-running"></i> Persecución</button>
+        <button type="button" data-roll-fear><i class="fas fa-eye"></i> Miedo</button>
+        <button type="button" data-roll-jamacuco><i class="fas fa-heart-pulse"></i> Jamacuco</button>
+        <button type="button" data-damage><i class="fas fa-kit-medical"></i> Aplicar daño</button>
+        <button type="button" data-help-type="rule" data-help-key="danoReglado" data-hazard-damage><i class="fas fa-triangle-exclamation"></i> Daño reglado</button>
+        <button type="button" data-heal><i class="fas fa-hand-holding-medical"></i> Curar</button>
+        <button type="button" data-rules-heal><i class="fas fa-briefcase-medical"></i> Curación reglada</button>
+        <button type="button" data-gain-yayo><i class="fas fa-plus"></i> Yayopoint</button>
+        <button type="button" data-spend-yayo><i class="fas fa-minus"></i> Yayopoint</button>
+        <button type="button" data-boost-defense><i class="fas fa-shield"></i> +Bemoles/Nervio</button>
+        <button type="button" data-help-type="rule" data-help-key="empeoramiento" data-worsen-attribute><i class="fas fa-arrow-trend-down"></i> Empeorar</button>
+      </section>
+      <section class="ims-dashboard">
+        <div>
+          <h3>Estado</h3>
+          <label>Salud actual<input type="number" name="system.salud.valor" value="{{system.salud.valor}}"></label>
+          <label>Salud inicial/max<input type="number" name="system.salud.max" value="{{system.salud.max}}"></label>
+          <label>Yayopoints<input type="number" name="system.yayopoints.valor" value="{{system.yayopoints.valor}}"></label>
+          <label class="check"><input type="checkbox" name="system.estado.inconsciente" {{imsChecked system.estado.inconsciente}}> Inconsciente</label>
+          <label class="check"><input type="checkbox" name="system.estado.muerto" {{imsChecked system.estado.muerto}}> Muerto</label>
+        </div>
+        <div>
+          <h3>Sesión</h3>
+          <label class="check"><input type="checkbox" name="system.flashback.usado" {{imsChecked system.flashback.usado}}> Es que yo a tus años usado</label>
+          <label class="check"><input type="checkbox" name="system.achaques.menorUsado" {{imsChecked system.achaques.menorUsado}}> Achaque menor usado</label>
+          <label>Nota del flashback<textarea name="system.flashback.nota">{{system.flashback.nota}}</textarea></label>
+        </div>
+        <div>
+          <h3>Combate</h3>
+          <label>Arma para iniciativa
+            <select name="system.combate.armaIniciativa">
+              {{#each config.ataqueTipos}}<option value="{{@key}}" {{imsSelected @key ../system.combate.armaIniciativa}}>{{label}}</option>{{/each}}
+            </select>
+          </label>
+          <label>Ataque
+            <select name="system.combate.ataque">
+              {{#each config.ataqueTipos}}<option value="{{@key}}" {{imsSelected @key ../system.combate.ataque}}>{{label}}</option>{{/each}}
+            </select>
+          </label>
+          <label class="check"><input type="checkbox" name="system.combate.sorprendido" {{imsChecked system.combate.sorprendido}}> Pillado por sorpresa</label>
+        </div>
+      </section>
+    </div>
+    {{/if}}
+
+    <div class="tab ims-tab-panel" data-group="primary" data-tab="equipo">
+      <section class="ims-inventory">
+        <header><h2>Pertenencias arrastrables</h2><button type="button" data-item-create="equipo"><i class="fas fa-plus"></i> Equipo</button><button type="button" data-item-create="arma"><i class="fas fa-plus"></i> Arma</button><button type="button" data-item-create="talento"><i class="fas fa-plus"></i> Talento</button><button type="button" data-item-create="arquetipo"><i class="fas fa-plus"></i> Arquetipo</button></header>
+        {{#each itemsByType}}
+        <h3>{{@key}}</h3>
+        <ol>
+          {{#each this}}
+          <li class="item {{#if system.equipado}}equipped{{/if}}" data-item-id="{{id}}">
+            <img src="{{img}}" alt="">
+            <span>{{name}}</span>
+            <button type="button" data-item-equip title="Equipar"><i class="fas fa-shirt"></i></button>
+            <button type="button" data-item-use title="Usar"><i class="fas fa-dice-six"></i></button>
+            <button type="button" data-item-chat><i class="fas fa-comment"></i></button>
+            <button type="button" data-item-edit><i class="fas fa-pen"></i></button>
+            <button type="button" data-item-delete><i class="fas fa-trash"></i></button>
+          </li>
+          {{/each}}
+        </ol>
+        {{/each}}
+      </section>
+    </div>
+
+    <div class="tab ims-tab-panel" data-group="primary" data-tab="notas">
+      <section class="ims-notes">
+        <label>Relaciones<textarea name="system.datos.relaciones">{{system.datos.relaciones}}</textarea></label>
+        <label>Notas de estado<textarea name="system.estado.notas">{{system.estado.notas}}</textarea></label>
+      </section>
+    </div>
+  </section>
+</form>
