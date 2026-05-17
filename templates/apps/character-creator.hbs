@@ -28,6 +28,12 @@
           <strong>Mediante arquetipo</strong>
           <span>El manual fija atributos, habilidades, Yayopoints, Jamacuco y Salud base. A cambio recibes el talento del arquetipo.</span>
         </label>
+        <label class="ims-choice">
+          <input type="radio" name="mode" value="aleatorio" data-creator-mode {{imsChecked (eq state.mode "aleatorio")}}>
+          <strong>Aleatorio rápido</strong>
+          <span>Rellena automáticamente una creación libre legal: atributos, 4 habilidades a 3D, 6 a 2D, partido, achaques y Salud.</span>
+          <button type="button" data-random-character><i class="fas fa-wand-magic-sparkles"></i> Generar ahora</button>
+        </label>
       </div>
     </section>
     {{/if}}
@@ -91,8 +97,8 @@
         <div class="ims-creator-grid four">
           {{#each atributos}}
           <label>{{short}} · {{label}}
-            <select name="atributos.{{key}}">
-              {{#each ../attrOptions}}<option value="{{value}}" {{imsSelected value ../value}}>{{label}}</option>{{/each}}
+            <select name="atributos.{{key}}" data-attribute-bonus="{{key}}">
+              {{#each options}}<option value="{{value}}" {{imsSelected value ../value}}>{{label}}</option>{{/each}}
             </select>
           </label>
           {{/each}}
@@ -104,8 +110,8 @@
             <span>{{label}} <small>{{attr}}</small></span>
             <select name="habilidades.{{key}}" data-skill-rank="{{key}}">
               <option value="1" {{imsSelected dice 1}}>1D</option>
-              <option value="2" {{imsSelected dice 2}}>2D</option>
-              <option value="3" {{imsSelected dice 3}}>3D</option>
+              <option value="2" {{imsSelected dice 2}} {{#if lock2}}disabled{{/if}}>2D</option>
+              <option value="3" {{imsSelected dice 3}} {{#if lock3}}disabled{{/if}}>3D</option>
             </select>
           </label>
           {{/each}}
@@ -137,7 +143,7 @@
     <section class="ims-creator-card">
       <h2>5. Resumen antes de crear</h2>
       <div class="ims-summary-grid">
-        <div><strong>Método</strong><span>{{#if effective.arquetipo}}{{effective.arquetipo.name}}{{else}}Creación libre{{/if}}</span></div>
+        <div><strong>Método</strong><span>{{#if effective.arquetipo}}{{effective.arquetipo.name}}{{else}}{{#if (eq state.mode "aleatorio")}}Aleatorio rápido{{else}}Creación libre{{/if}}{{/if}}</span></div>
         <div><strong>Yayopoints</strong><span>{{effective.yayos}}</span></div>
         <div><strong>Bemoles</strong><span>{{effective.bemoles}}</span></div>
         <div><strong>Nervio</strong><span>{{effective.nervio}}</span></div>

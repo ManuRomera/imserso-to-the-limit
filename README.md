@@ -1,4 +1,4 @@
-# YayoSystem para Foundry VTT (no oficial)
+# YayoSystem (no oficial)
 
 Sistema no oficial para jugar con las reglas de YayoSystem en Foundry VTT.
 

@@ -949,6 +949,12 @@
   min-height: 30px;
   padding: 0;
   place-items: center;
+  color: #fff;
+}
+
+.ims-extra-actions button i,
+.ims-extra-inventory.compact button i {
+  color: #fff;
 }
 
 .ims-extra-top {
@@ -1519,14 +1525,13 @@
 
 .ims-creator-main {
   min-height: 0;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: 10px;
+  display: block;
   padding: 14px;
   overflow: auto;
 }
 
 .ims-creator-header {
+  margin-bottom: 10px;
   padding: 10px 14px;
   background: #fff;
   border: 4px solid var(--ims-ink);
@@ -1548,6 +1553,7 @@
 
 .ims-creator-card {
   min-height: 0;
+  margin-bottom: 10px;
   padding: 14px;
   background: #fff;
   border: 4px solid var(--ims-ink);
@@ -1569,7 +1575,7 @@
 }
 
 .ims-choice-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .ims-choice {
@@ -1593,6 +1599,16 @@
 
 .ims-choice span {
   font-weight: 800;
+}
+
+.ims-choice button {
+  grid-column: 2;
+  min-height: 34px;
+  color: #fff;
+  background: var(--ims-plum);
+  border: 3px solid #fff;
+  border-radius: 6px;
+  font-weight: 1000;
 }
 
 .ims-creator-grid.two {
@@ -1771,7 +1787,9 @@
   display: flex;
   justify-content: flex-end;
   gap: 8px;
+  margin-top: 10px;
   padding-top: 4px;
+  background: transparent;
 }
 
 .ims-creator-footer button:first-child {

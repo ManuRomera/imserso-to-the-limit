@@ -1,7 +1,7 @@
 import { IMSERSO, labelForAttribute, labelForSkill } from "./config.mjs";
 import { ARQUETIPOS } from "./arquetipos-data.mjs";
 import { helpEntry } from "./help-data.mjs";
-import { openCharacterCreator } from "./character-creator.mjs";
+import { applyRandomExtra, openCharacterCreator } from "./character-creator.mjs";
 
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 
@@ -126,6 +126,7 @@ export class ImsersoActorSheet extends ActorSheet {
     html.find("[data-roll-reserve]").on("click", () => this._withScroll(() => this.actor.reserveAction()));
     html.find("[data-roll-fear]").on("click", () => this._withScroll(() => game.imserso.rollMiedo?.()));
     html.find("[data-character-creator]").on("click", () => this._withScroll(() => openCharacterCreator(this.actor)));
+    html.find("[data-random-extra]").on("click", () => this._withScroll(() => applyRandomExtra(this.actor)));
     html.find("[data-apply-archetype]").on("click", (ev) => this._withScroll(() => this._applySelectedArchetype(ev.currentTarget)));
     html.find("[data-rules-heal]").on("click", () => this._withScroll(() => this.actor.rollRulesHealing()));
     html.find("[data-hazard-damage]").on("click", () => this._withScroll(() => this.actor.rollHazardDamage()));
