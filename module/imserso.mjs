@@ -4,6 +4,7 @@ import { buildAchaquesTables, buildReglasJournals, getAchaque } from "./reglas-d
 import { ImsersoActor } from "./actor.mjs";
 import { ImsersoItem } from "./item.mjs";
 import { ImsersoActorSheet, ImsersoItemSheet } from "./sheets.mjs";
+import { openCharacterCreator } from "./character-creator.mjs";
 
 Hooks.once("init", async () => {
   console.log("IMSERSO to the limit | Inicializando YayoSystem");
@@ -13,6 +14,7 @@ Hooks.once("init", async () => {
     arquetipos: ARQUETIPOS,
     rollSkill: (actorId, skill) => game.actors.get(actorId)?.rollSkill(skill),
     rollJamacuco: (actorId) => game.actors.get(actorId)?.rollJamacuco(),
+    openCharacterCreator,
     rollAchaques,
     rollMiedo
   };
@@ -102,6 +104,20 @@ Hooks.on("renderDialog", (_dialog, html) => {
     input.value = Math.min(max, Math.max(min, current + (direction * step)));
     input.dispatchEvent(new Event("change", { bubbles: true }));
   });
+});
+
+Hooks.on("renderActorDirectory", (_app, html) => {
+  if (!game.user.isGM) return;
+  if (html.find("[data-ims-create-jubilado]").length) return;
+  const button = $(`<button type="button" data-ims-create-jubilado><i class="fas fa-person-cane"></i> Creador IMSERSO</button>`);
+  button.on("click", () => openCharacterCreator());
+  const createButton = html.find('[data-action="createEntry"], [data-action="createDocument"], .create-document, .create-entity').first();
+  if (createButton.length) createButton.after(button);
+  else {
+    const footer = html.find(".directory-footer");
+    if (footer.length) footer.prepend(button);
+    else html.find(".directory-header").append(button);
+  }
 });
 
 function escapeHtml(value) {

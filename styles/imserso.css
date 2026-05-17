@@ -35,6 +35,19 @@
   background: var(--ims-paper);
 }
 
+#actors [data-ims-create-jubilado],
+.actors-sidebar [data-ims-create-jubilado],
+.directory [data-ims-create-jubilado] {
+  min-height: 40px;
+  margin-left: 6px;
+  padding: 0 12px;
+  color: #fff;
+  background: var(--ims-plum);
+  border: 2px solid #fff;
+  border-radius: 6px;
+  font-weight: 1000;
+}
+
 .ims-sheet {
   position: relative;
   height: 100%;
@@ -1443,6 +1456,326 @@
   border-radius: 6px;
   font-size: 17px;
   font-weight: 1000;
+}
+
+.ims-creator-app .window-content {
+  padding: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(61, 155, 85, 0.14), transparent 28%),
+    var(--ims-paper);
+}
+
+.ims-creator {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  color: var(--ims-ink);
+  font-family: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
+}
+
+.ims-creator-steps {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 14px 10px;
+  background: var(--ims-plum);
+  border-right: 6px solid var(--ims-pink);
+}
+
+.ims-creator-steps button {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 8px;
+  align-items: center;
+  min-height: 42px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  text-align: left;
+  font-weight: 1000;
+}
+
+.ims-creator-steps button span {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  color: var(--ims-plum);
+  background: #fff;
+  border-radius: 50%;
+}
+
+.ims-creator-steps button.active {
+  color: var(--ims-plum);
+  background: #fff;
+  transform: translateX(6px);
+}
+
+.ims-creator-steps button.done {
+  border-color: var(--ims-mint);
+}
+
+.ims-creator-main {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 10px;
+  padding: 14px;
+  overflow: auto;
+}
+
+.ims-creator-header {
+  padding: 10px 14px;
+  background: #fff;
+  border: 4px solid var(--ims-ink);
+  box-shadow: 6px 6px 0 var(--ims-mint);
+}
+
+.ims-creator-header h1 {
+  margin: 0;
+  color: var(--ims-plum);
+  font-size: 30px;
+  font-weight: 1000;
+}
+
+.ims-creator-header p,
+.ims-creator-note {
+  margin: 4px 0 0;
+  font-weight: 800;
+}
+
+.ims-creator-card {
+  min-height: 0;
+  padding: 14px;
+  background: #fff;
+  border: 4px solid var(--ims-ink);
+  box-shadow: 6px 6px 0 var(--ims-green-soft);
+}
+
+.ims-creator-card h2 {
+  margin: 0 0 10px;
+  color: var(--ims-plum);
+  font-size: 25px;
+  font-weight: 1000;
+  border-bottom: 3px solid var(--ims-plum);
+}
+
+.ims-choice-grid,
+.ims-creator-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.ims-choice-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ims-choice {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 8px;
+  padding: 12px;
+  background: #fff8df;
+  border: 3px solid var(--ims-ink);
+}
+
+.ims-choice strong,
+.ims-choice span {
+  grid-column: 2;
+}
+
+.ims-choice strong {
+  color: var(--ims-plum);
+  font-size: 21px;
+}
+
+.ims-choice span {
+  font-weight: 800;
+}
+
+.ims-creator-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ims-creator-grid.four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.ims-creator-grid .span-2 {
+  grid-column: 1 / -1;
+}
+
+.ims-creator label {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  color: var(--ims-muted);
+  font-size: 14px;
+  font-weight: 1000;
+  text-transform: uppercase;
+}
+
+.ims-creator input,
+.ims-creator select,
+.ims-creator textarea {
+  width: 100%;
+  min-height: 34px;
+  color: var(--ims-ink);
+  background: #fff;
+  border: 2px solid var(--ims-ink);
+  border-radius: 3px;
+  font-size: 15px;
+  font-weight: 900;
+  text-transform: none;
+}
+
+.ims-creator textarea {
+  min-height: 62px;
+  resize: vertical;
+}
+
+.ims-inline-control {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px;
+}
+
+.ims-inline-control button,
+.ims-creator-actions-inline button,
+.ims-creator-footer button {
+  min-height: 36px;
+  color: #fff;
+  background: var(--ims-plum);
+  border: 3px solid #fff;
+  border-radius: 6px;
+  font-weight: 1000;
+}
+
+.ims-archetype-summary {
+  margin-top: 10px;
+  padding: 12px;
+  background: #fff8df;
+  border: 3px solid var(--ims-ink);
+}
+
+.ims-archetype-summary h3 {
+  margin: 0 0 6px;
+  color: var(--ims-plum);
+  font-size: 24px;
+}
+
+.ims-archetype-summary dl {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 5px 10px;
+  margin: 10px 0 0;
+}
+
+.ims-archetype-summary dt,
+.ims-summary-grid strong {
+  color: var(--ims-muted);
+  font-weight: 1000;
+  text-transform: uppercase;
+}
+
+.ims-archetype-summary dd {
+  margin: 0;
+  font-weight: 900;
+}
+
+.ims-skill-builder {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 10px;
+}
+
+.ims-skill-builder header {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  color: var(--ims-plum);
+  font-size: 18px;
+  font-weight: 1000;
+}
+
+.ims-skill-builder label {
+  grid-template-columns: minmax(0, 1fr) 74px;
+  align-items: center;
+  padding: 6px;
+  background: #fffefa;
+  border: 2px solid rgba(17, 17, 17, 0.35);
+  text-transform: none;
+}
+
+.ims-skill-builder small {
+  color: var(--ims-blue-ink);
+}
+
+.ims-creator-actions-inline {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.ims-derived-panel,
+.ims-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.ims-derived-panel span,
+.ims-summary-grid div {
+  padding: 10px;
+  background: #fff8df;
+  border: 3px solid var(--ims-ink);
+  font-weight: 900;
+}
+
+.ims-summary-grid div {
+  display: grid;
+  gap: 4px;
+}
+
+.ims-summary-grid span {
+  font-size: 22px;
+  font-weight: 1000;
+}
+
+.ims-creator-warnings {
+  margin-top: 12px;
+  padding: 10px;
+  background: #fff2b8;
+  border: 3px solid var(--ims-warn);
+  font-weight: 900;
+}
+
+.ims-creator-warnings ul {
+  margin: 6px 0 0 18px;
+}
+
+.ims-creator-ok {
+  margin: 12px 0 0;
+  padding: 10px;
+  color: #fff;
+  background: var(--ims-green);
+  border: 3px solid var(--ims-ink);
+  font-weight: 1000;
+}
+
+.ims-creator-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.ims-creator-footer button:first-child {
+  background: var(--ims-muted);
 }
 
 .ims-chat-card {

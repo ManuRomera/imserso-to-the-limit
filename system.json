@@ -1,11 +1,20 @@
 {
   "id": "imserso-to-the-limit",
-  "title": "IMSERSO to the limit",
-  "description": "Sistema completo en castellano para jugar IMSERSO to the limit con YayoSystem: fichas de jubilado, extras, tiradas, Jamacuco, Salud, Yayopoints, iniciativa y compendios de inicio.",
-  "version": "1.0.1",
+  "title": "YayoSystem para Foundry VTT (no oficial)",
+  "description": "Sistema no oficial para Foundry VTT. Requiere el manual original. Este paquete no está afiliado, aprobado ni publicado por los autores o titulares de IMSERSO to the limit. El código y los recursos originales del paquete están bajo la licencia indicada en LICENSE.md. Cualquier Open Game Content usado se reproduce bajo los términos de la Open Game License.",
+  "version": "1.0.2",
   "url": "https://github.com/ManuRomera/imserso-to-the-limit",
   "manifest": "https://raw.githubusercontent.com/ManuRomera/imserso-to-the-limit/main/system.json",
   "download": "https://github.com/ManuRomera/imserso-to-the-limit/archive/refs/heads/main.zip",
+  "background": "systems/imserso-to-the-limit/assets/imserso-to-the-limit.webp",
+  "media": [
+    {
+      "type": "cover",
+      "url": "systems/imserso-to-the-limit/assets/imserso-to-the-limit.webp"
+    }
+  ],
+  "license": "LICENSE.md",
+  "readme": "README.md",
   "compatibility": {
     "minimum": "11",
     "verified": "13",

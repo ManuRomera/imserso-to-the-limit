@@ -1,0 +1,169 @@
+<form class="ims-creator">
+  <aside class="ims-creator-steps">
+    {{#each steps}}
+    <button type="button" data-creator-step="{{index}}" class="{{#if active}}active{{/if}} {{#if done}}done{{/if}}">
+      <span>{{index}}</span>
+      <b>{{label}}</b>
+    </button>
+    {{/each}}
+  </aside>
+
+  <main class="ims-creator-main">
+    <header class="ims-creator-header">
+      <h1>Creador guiado de jubilados</h1>
+      <p>Basado en el capítulo de creación: libre desde cero o mediante arquetipo.</p>
+    </header>
+
+    {{#if (eq stepKey "modo")}}
+    <section class="ims-creator-card">
+      <h2>1. Método de creación</h2>
+      <div class="ims-choice-grid">
+        <label class="ims-choice">
+          <input type="radio" name="mode" value="libre" data-creator-mode {{imsChecked (eq state.mode "libre")}}>
+          <strong>Creación libre</strong>
+          <span>Rellena todos los pasos del manual: partido por 2D6, atributos 0/+2/+4/+6, 4 habilidades a 3D y 6 a 2D.</span>
+        </label>
+        <label class="ims-choice">
+          <input type="radio" name="mode" value="arquetipo" data-creator-mode {{imsChecked (eq state.mode "arquetipo")}}>
+          <strong>Mediante arquetipo</strong>
+          <span>El manual fija atributos, habilidades, Yayopoints, Jamacuco y Salud base. A cambio recibes el talento del arquetipo.</span>
+        </label>
+      </div>
+    </section>
+    {{/if}}
+
+    {{#if (eq stepKey "datos")}}
+    <section class="ims-creator-card">
+      <h2>2. Datos de la persona solicitante</h2>
+      <div class="ims-creator-grid two">
+        <label>Nombre del jugador<input name="datos.jugador" value="{{state.datos.jugador}}"></label>
+        <label>Nombre del PJ<input name="name" value="{{state.name}}"></label>
+        <label>Lugar de nacimiento<input name="datos.lugarNacimiento" value="{{state.datos.lugarNacimiento}}"></label>
+        <label>Años<input name="datos.anos" value="{{state.datos.anos}}" placeholder="60 o más"></label>
+        <label>Antigua profesión (+3)<input name="datos.antiguaProfesion" value="{{state.datos.antiguaProfesion}}"></label>
+        <label>Partido
+          <div class="ims-inline-control">
+            <select name="datos.partido">
+              <option value="">Sin determinar</option>
+              {{#each partidos}}<option value="{{name}}" {{imsSelected name ../state.datos.partido}}>{{name}}</option>{{/each}}
+            </select>
+            <button type="button" data-roll-party><i class="fas fa-dice"></i> 2D6</button>
+          </div>
+        </label>
+        <label class="span-2">Familia y nietos<textarea name="datos.familiaNietos">{{state.datos.familiaNietos}}</textarea></label>
+        <label class="span-2">Pertenencias habituales<textarea name="datos.pertenencias">{{state.datos.pertenencias}}</textarea></label>
+        <label class="span-2">Vida y milagros<textarea name="datos.vidaMilagros">{{state.datos.vidaMilagros}}</textarea></label>
+      </div>
+    </section>
+    {{/if}}
+
+    {{#if (eq stepKey "reglas")}}
+      {{#if (eq state.mode "arquetipo")}}
+      <section class="ims-creator-card">
+        <h2>3. Arquetipo</h2>
+        <label>Arquetipo
+          <select name="arquetipoKey">
+            <option value="">Selecciona arquetipo</option>
+            {{#each arquetipos}}<option value="{{key}}" {{#if selected}}selected{{/if}}>{{name}} · {{genero}}</option>{{/each}}
+          </select>
+        </label>
+        {{#if selectedArquetipo}}
+        <div class="ims-archetype-summary">
+          <h3>{{selectedArquetipo.name}}</h3>
+          <p>{{selectedArquetipo.description}}</p>
+          <dl>
+            <dt>Partido permitido</dt><dd>{{selectedArquetipo.allowedParties}}</dd>
+            <dt>Atributos</dt><dd>CAC {{selectedArquetipo.attrs.cac}}, GRA {{selectedArquetipo.attrs.gra}}, PRE {{selectedArquetipo.attrs.pre}}, ROB {{selectedArquetipo.attrs.rob}}</dd>
+            <dt>3D</dt><dd>{{selectedArquetipo.skill3}}</dd>
+            <dt>2D</dt><dd>{{selectedArquetipo.skill2}}</dd>
+            <dt>Yayopoints</dt><dd>{{selectedArquetipo.yayos}}</dd>
+            <dt>Jamacuco</dt><dd>{{selectedArquetipo.jamacuco}}</dd>
+            <dt>Salud</dt><dd>{{selectedArquetipo.saludBase}} + 1D6</dd>
+            <dt>Talento</dt><dd><strong>{{selectedArquetipo.talentName}}.</strong> {{selectedArquetipo.talent}}</dd>
+          </dl>
+        </div>
+        {{/if}}
+      </section>
+      {{else}}
+      <section class="ims-creator-card">
+        <h2>3. Atributos y habilidades</h2>
+        <p class="ims-creator-note">Reparte una vez cada bonificador entre los cuatro atributos: 0, +2, +4 y +6. Después marca exactamente 4 habilidades a 3D y 6 a 2D.</p>
+        <div class="ims-creator-grid four">
+          {{#each atributos}}
+          <label>{{short}} · {{label}}
+            <select name="atributos.{{key}}">
+              {{#each ../attrOptions}}<option value="{{value}}" {{imsSelected value ../value}}>{{label}}</option>{{/each}}
+            </select>
+          </label>
+          {{/each}}
+        </div>
+        <div class="ims-skill-builder">
+          <header><strong>Habilidades</strong><span>3D: {{selected3}}/4 · 2D: {{selected2}}/6</span></header>
+          {{#each habilidades}}
+          <label>
+            <span>{{label}} <small>{{attr}}</small></span>
+            <select name="habilidades.{{key}}" data-skill-rank="{{key}}">
+              <option value="1" {{imsSelected dice 1}}>1D</option>
+              <option value="2" {{imsSelected dice 2}}>2D</option>
+              <option value="3" {{imsSelected dice 3}}>3D</option>
+            </select>
+          </label>
+          {{/each}}
+        </div>
+      </section>
+      {{/if}}
+    {{/if}}
+
+    {{#if (eq stepKey "achaques")}}
+    <section class="ims-creator-card">
+      <h2>4. Achaques y Salud inicial</h2>
+      <div class="ims-creator-grid two">
+        <label>Achaque mayor<input name="achaques.mayor" value="{{state.achaques.mayor}}"></label>
+        <label>Achaque menor<input name="achaques.menor" value="{{state.achaques.menor}}"></label>
+      </div>
+      <div class="ims-creator-actions-inline">
+        <button type="button" data-roll-aches><i class="fas fa-table-list"></i> Generar achaques</button>
+        <button type="button" data-roll-health><i class="fas fa-dice-six"></i> Tirar Salud inicial</button>
+      </div>
+      <div class="ims-derived-panel">
+        <span>Base de Salud: <strong>{{effective.healthBase}}</strong></span>
+        <span>1D6: <strong>{{#if state.healthRoll}}{{state.healthRoll}}{{else}}pendiente{{/if}}</strong></span>
+        <span>Total: <strong>{{#if state.healthRoll}}{{effective.health}}{{else}}pendiente{{/if}}</strong></span>
+      </div>
+    </section>
+    {{/if}}
+
+    {{#if (eq stepKey "resumen")}}
+    <section class="ims-creator-card">
+      <h2>5. Resumen antes de crear</h2>
+      <div class="ims-summary-grid">
+        <div><strong>Método</strong><span>{{#if effective.arquetipo}}{{effective.arquetipo.name}}{{else}}Creación libre{{/if}}</span></div>
+        <div><strong>Yayopoints</strong><span>{{effective.yayos}}</span></div>
+        <div><strong>Bemoles</strong><span>{{effective.bemoles}}</span></div>
+        <div><strong>Nervio</strong><span>{{effective.nervio}}</span></div>
+        <div><strong>Jamacuco</strong><span>{{effective.jamacuco}}</span></div>
+        <div><strong>Salud</strong><span>{{#if state.healthRoll}}{{effective.health}}{{else}}pendiente{{/if}}</span></div>
+      </div>
+      {{#if warnings.length}}
+      <div class="ims-creator-warnings">
+        <strong>Pendiente</strong>
+        <ul>{{#each warnings}}<li>{{this}}</li>{{/each}}</ul>
+      </div>
+      {{else}}
+      <p class="ims-creator-ok">Todo listo para aplicar la ficha.</p>
+      {{/if}}
+    </section>
+    {{/if}}
+
+    <input type="hidden" name="mode" value="{{state.mode}}">
+
+    <footer class="ims-creator-footer">
+      <button type="button" data-creator-prev><i class="fas fa-arrow-left"></i> Atrás</button>
+      {{#if (eq stepKey "resumen")}}
+      <button type="button" data-creator-apply><i class="fas fa-id-card"></i> Crear / aplicar</button>
+      {{else}}
+      <button type="button" data-creator-next>Continuar <i class="fas fa-arrow-right"></i></button>
+      {{/if}}
+    </footer>
+  </main>
+</form>

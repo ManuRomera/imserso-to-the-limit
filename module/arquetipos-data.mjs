@@ -250,7 +250,7 @@ export function archetypeTalentItem(arquetipo) {
   return {
     name: arquetipo.talentName,
     type: "talento",
-    img: "icons/svg/star.svg",
+    img: "icons/svg/d20-grey.svg",
     system: {
       descripcion: arquetipo.talent,
       usos: { valor: 1, max: 1 },
