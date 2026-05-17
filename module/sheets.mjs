@@ -337,8 +337,8 @@ export class ImsersoItemSheet extends ItemSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["imserso", "sheet", "item"],
-      width: 480,
-      height: 460,
+      width: 560,
+      height: 390,
       resizable: true,
       submitOnChange: true,
       submitOnClose: true,

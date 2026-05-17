@@ -2,7 +2,7 @@
   "id": "imserso-to-the-limit",
   "title": "IMSERSO to the limit",
   "description": "Sistema completo en castellano para jugar IMSERSO to the limit con YayoSystem: fichas de jubilado, extras, tiradas, Jamacuco, Salud, Yayopoints, iniciativa y compendios de inicio.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "url": "https://github.com/ManuRomera/imserso-to-the-limit",
   "manifest": "https://raw.githubusercontent.com/ManuRomera/imserso-to-the-limit/main/system.json",
   "download": "https://github.com/ManuRomera/imserso-to-the-limit/archive/refs/heads/main.zip",

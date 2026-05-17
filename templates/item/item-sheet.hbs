@@ -1,16 +1,18 @@
 <form class="ims-sheet ims-item" autocomplete="off">
-  <header class="ims-extra-header">
+  <header class="ims-extra-header ims-item-header">
     <img src="{{item.img}}" data-edit="img" alt="">
-    <div>
+    <div class="ims-item-head-main">
       <input class="ims-title-input" name="name" value="{{item.name}}">
-      <button type="button" data-item-use><i class="fas fa-dice-six"></i> Usar</button>
-      <button type="button" data-item-chat><i class="fas fa-comment"></i> Enviar al chat</button>
+      <div class="ims-item-actions">
+        <button type="button" data-item-use><i class="fas fa-dice-six"></i> Usar</button>
+        <button type="button" data-item-chat><i class="fas fa-comment"></i> Chat</button>
+      </div>
     </div>
   </header>
 
   {{#if (eq item.type "arma")}}
-  <section class="ims-dashboard">
-    <div>
+  <section class="ims-item-panel">
+    <div class="ims-item-fields arma-fields">
       <label>Tipo
         <select name="system.tipo">
           {{#each config.ataqueTipos}}<option value="{{@key}}" {{imsSelected @key ../system.tipo}}>{{label}}</option>{{/each}}
@@ -34,8 +36,8 @@
   {{/if}}
 
   {{#if (eq item.type "talento")}}
-  <section class="ims-dashboard">
-    <div>
+  <section class="ims-item-panel">
+    <div class="ims-item-fields talento-fields">
       <label>Usos<input type="number" name="system.usos.valor" value="{{system.usos.valor}}"></label>
       <label>Usos max<input type="number" name="system.usos.max" value="{{system.usos.max}}"></label>
       <label class="check"><input type="checkbox" name="system.equipado" {{imsChecked system.equipado}}> Equipado</label>
@@ -56,8 +58,8 @@
   {{/if}}
 
   {{#if (eq item.type "equipo")}}
-  <section class="ims-dashboard">
-    <div>
+  <section class="ims-item-panel">
+    <div class="ims-item-fields equipo-fields">
       <label>Cantidad<input type="number" name="system.cantidad" value="{{system.cantidad}}"></label>
       <label>Uso<input name="system.uso" value="{{system.uso}}"></label>
       <label class="check"><input type="checkbox" name="system.equipado" {{imsChecked system.equipado}}> Equipado</label>
@@ -78,8 +80,8 @@
   {{/if}}
 
   {{#if (eq item.type "arquetipo")}}
-  <section class="ims-dashboard">
-    <div>
+  <section class="ims-item-panel">
+    <div class="ims-item-fields arquetipo-fields">
       <label>Clave de arquetipo<input name="system.arquetipoKey" value="{{system.arquetipoKey}}"></label>
       <label>Género<input name="system.genero" value="{{system.genero}}"></label>
       <label>Partido<input name="system.partido" value="{{system.partido}}"></label>
@@ -91,5 +93,5 @@
   </section>
   {{/if}}
 
-  <label class="ims-description">Descripción<textarea name="system.descripcion">{{descripcionTexto}}</textarea></label>
+  <label class="ims-description ims-item-description">Descripción<textarea name="system.descripcion">{{descripcionTexto}}</textarea></label>
 </form>

@@ -1224,12 +1224,135 @@
   font-weight: 1000 !important;
 }
 
+.ims-item {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+}
+
+.ims-item .ims-item-header {
+  grid-template-columns: 64px 1fr;
+  gap: 10px;
+  padding: 10px;
+}
+
+.ims-item .ims-item-header img {
+  width: 58px;
+  height: 58px;
+  border: 2px solid var(--ims-ink);
+}
+
+.ims-item-head-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.ims-item .ims-title-input {
+  min-width: 0;
+  font-size: 22px !important;
+}
+
+.ims-item-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(74px, auto));
+  gap: 6px;
+}
+
+.ims-item-actions button {
+  min-height: 34px;
+  margin: 0;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.ims-item-panel,
+.ims-item-description {
+  padding: 10px;
+  background: #fff;
+  border: 3px solid var(--ims-ink);
+  box-shadow: 5px 5px 0 var(--ims-mint);
+}
+
+.ims-item-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 10px;
+  align-items: end;
+}
+
+.ims-item-fields label,
+.ims-item-description {
+  margin: 0;
+}
+
+.ims-item-fields label {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  color: var(--ims-muted);
+  font-size: 13px;
+  font-weight: 1000;
+  text-transform: uppercase;
+}
+
+.ims-item-fields input,
+.ims-item-fields select {
+  min-height: 30px;
+  padding: 3px 6px;
+  color: var(--ims-ink);
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.ims-item-fields .check {
+  align-self: center;
+  display: flex;
+  gap: 8px;
+  padding-top: 18px;
+  color: var(--ims-ink);
+}
+
+.ims-item-fields .check input {
+  width: 22px;
+  height: 22px;
+  min-height: 0;
+}
+
+.ims-item-description {
+  display: grid;
+  gap: 5px;
+  color: var(--ims-muted);
+  font-size: 14px;
+  font-weight: 1000;
+  text-transform: uppercase;
+}
+
+.ims-item-description textarea {
+  min-height: 72px;
+  max-height: 96px;
+  resize: vertical;
+  color: var(--ims-ink);
+  font-size: 15px;
+  font-weight: 900;
+  text-transform: none;
+}
+
 .ims-description {
   margin-top: 12px;
 }
 
 .ims-description textarea {
   min-height: 180px;
+}
+
+.ims-item .ims-description {
+  margin-top: 0;
+}
+
+.ims-item .ims-description textarea {
+  min-height: 72px;
 }
 
 .ims-dialog {
