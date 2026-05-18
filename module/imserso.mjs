@@ -329,8 +329,7 @@ async function chooseRerollDice(data, faces) {
   const checks = faces.map((face, index) => `
     <label class="ims-die-choice">
       <input type="checkbox" name="die" value="${index}" ${face < 5 ? "checked" : ""}>
-      <span>${index + 1}</span>
-      <b>${face}</b>
+      <b aria-label="Resultado ${face}">${face}</b>
     </label>`).join("");
   return Dialog.prompt({
     title: `Repetir con yayopoint: ${escapeHtml(data.label)}`,

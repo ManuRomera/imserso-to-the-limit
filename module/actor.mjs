@@ -944,24 +944,26 @@ export class ImsersoActor extends Actor {
       content: `
         <form class="ims-dialog">
           <div class="ims-dialog-grid">
-            <label>Dificultad
+            <label><span>Dificultad</span>
               ${stepper("dificultad", defaults.dificultad, { min: 1, max: 30 })}
             </label>
-            <label>Dados extra, al alimón o capote recibido/prestado
+            <label><span>Dados extra / al alimón</span>
               ${stepper("extraDados", 0, { min: -3, max: 3 })}
             </label>
-            <label>Modificador fijo
+            <label><span>Modificador fijo</span>
               ${stepper("bonus", 0, { min: -20, max: 20 })}
             </label>
-            <label>Dados sacrificados al apuntar
+            <label><span>Dados sacrificados</span>
               ${stepper("dadosSacrificados", 0, { min: 0, max: 2 })}
             </label>
           </div>
-          <label class="check"><input type="checkbox" name="profesion"> Antigua profesión relacionada (+3)</label>
-          <label class="check"><input type="checkbox" name="yayoDado"> Gastar 1 yayopoint antes de tirar (+1D)</label>
-          <label class="check"><input type="checkbox" name="flashback" ${this.system.flashback?.usado ? "disabled" : ""}> Es que yo a tus años... (+1D)</label>
-          <label class="check"><input type="checkbox" name="achaqueMayor"> Achaque mayor activado (-1D, +1 yayopoint)</label>
-          <label class="check"><input type="checkbox" name="achaqueMenor" ${this.system.achaques?.menorUsado ? "disabled" : ""}> Achaque menor activado (repetición normal)</label>
+          <div class="ims-dialog-checks">
+            <label class="check"><input type="checkbox" name="profesion"> Antigua profesión (+3)</label>
+            <label class="check"><input type="checkbox" name="yayoDado"> Yayopoint antes de tirar (+1D)</label>
+            <label class="check"><input type="checkbox" name="flashback" ${this.system.flashback?.usado ? "disabled" : ""}> Es que yo a tus años... (+1D)</label>
+            <label class="check"><input type="checkbox" name="achaqueMayor"> Achaque mayor (-1D, +1 yayopoint)</label>
+            <label class="check"><input type="checkbox" name="achaqueMenor" ${this.system.achaques?.menorUsado ? "disabled" : ""}> Achaque menor (repetición normal)</label>
+          </div>
           <select name="oposicion" hidden><option value="">Dificultad fija</option>${op}</select>
         </form>`
     });

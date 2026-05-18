@@ -46,7 +46,7 @@
             <span>Yayopoints</span>
             <div class="ims-yayo-control">
               <button type="button" data-spend-yayo title="Bajar yayopoints"><i class="fas fa-minus"></i></button>
-              <input type="number" name="system.yayopoints.valor" value="{{system.yayopoints.valor}}" title="Yayopoints actuales">
+              <input type="number" value="{{system.yayopoints.valor}}" title="Yayopoints actuales" readonly>
               <b>/</b>
               <input type="number" name="system.yayopoints.inicial" value="{{system.yayopoints.inicial}}" title="Yayopoints iniciales o máximos">
               <button type="button" data-gain-yayo title="Subir yayopoints"><i class="fas fa-plus"></i></button>
@@ -185,7 +185,7 @@
           <h3>Estado</h3>
           <label>Salud actual<input type="number" name="system.salud.valor" value="{{system.salud.valor}}"></label>
           <label>Salud inicial/max<input type="number" name="system.salud.max" value="{{system.salud.max}}"></label>
-          <label>Yayopoints<input type="number" name="system.yayopoints.valor" value="{{system.yayopoints.valor}}"></label>
+          <label>Yayopoints<input type="number" value="{{system.yayopoints.valor}}" disabled></label>
           <label class="check"><input type="checkbox" name="system.estado.inconsciente" {{imsChecked system.estado.inconsciente}}> Inconsciente</label>
           <label class="check"><input type="checkbox" name="system.estado.muerto" {{imsChecked system.estado.muerto}}> Muerto</label>
         </div>
