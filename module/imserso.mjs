@@ -307,6 +307,7 @@ async function rerollWithYayo(message) {
   await actor.spendYayopoints(1);
   const keptFaces = faces.filter((_, index) => !selected.includes(index));
   const reroll = await new Roll(`${selected.length}d6`).evaluate({ async: true });
+  await showRollOnCanvas(reroll);
   const rerolledFaces = reroll.dice.flatMap((die) => die.results).map((r) => r.result);
   const finalFaces = mergeRerollFaces(faces, selected, rerolledFaces);
   const result = evaluateYayoFaces(data, finalFaces);
@@ -323,6 +324,15 @@ async function rerollWithYayo(message) {
     return message.update({ content: `${rerollContent}${renderDamageCard(workflow)}` });
   }
   return message.update({ content: rerollContent });
+}
+
+async function showRollOnCanvas(roll) {
+  if (!roll || !game.dice3d?.showForRoll) return;
+  try {
+    await game.dice3d.showForRoll(roll, game.user, true, null, false);
+  } catch (err) {
+    console.warn("IMSERSO to the limit | No se pudo mostrar la repetición de dados en pantalla.", err);
+  }
 }
 
 async function chooseRerollDice(data, faces) {

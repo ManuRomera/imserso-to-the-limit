@@ -2,7 +2,7 @@
   "id": "imserso-to-the-limit",
   "title": "YayoSystem (no oficial)",
   "description": "Sistema no oficial para Foundry VTT. Requiere el manual original. Este paquete no está afiliado, aprobado ni publicado por los autores o titulares de IMSERSO to the limit. El código y los recursos originales del paquete están bajo la licencia indicada en LICENSE.md. Cualquier Open Game Content usado se reproduce bajo los términos de la Open Game License.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "url": "https://github.com/ManuRomera/imserso-to-the-limit",
   "manifest": "https://raw.githubusercontent.com/ManuRomera/imserso-to-the-limit/main/system.json",
   "download": "https://github.com/ManuRomera/imserso-to-the-limit/archive/refs/heads/main.zip",
