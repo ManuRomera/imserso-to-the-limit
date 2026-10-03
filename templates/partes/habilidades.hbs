@@ -2,7 +2,7 @@
   {{#each atributos}}
   <article class="ims-grupo attr-{{clave}}">
     <header>
-      <span class="siglas" data-tooltip="{{label}}">{{short}}</span>
+      <span class="siglas"><b>{{label}}</b> <small>{{short}}</small></span>
       {{#if @root.editando}}<input type="number" name="system.atributos.{{clave}}" value="{{base}}" step="1" aria-label="Bonificador de {{label}}">{{else}}<b class="bono">{{bonoTexto}}</b>{{/if}}
     </header>
     <ul>

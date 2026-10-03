@@ -6,6 +6,8 @@
  *
  * Vive en localStorage: es una preferencia de este navegador, no un dato del mundo.
  */
+import { anadirBotonAccesibilidad } from "./accesibilidad.mjs";
+
 const PREFIJO = "imserso-to-the-limit.ventana.";
 const CAMPOS = ["left", "top", "width", "height"];
 
@@ -88,6 +90,7 @@ export function ConMemoria(Base) {
 
     async _onRender(context, options) {
       await super._onRender(context, options);
+      anadirBotonAccesibilidad(this);
       for (const d of this.element.querySelectorAll("details[data-memoria]")) {
         d.addEventListener("toggle", () => this.#recordarSeccion(d.dataset.memoria, d.open));
       }

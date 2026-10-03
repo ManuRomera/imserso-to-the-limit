@@ -12,6 +12,7 @@ import { helpEntry } from "./help-data.mjs";
 import { pedirDatos } from "./dialogos.mjs";
 import { abrirCreador } from "./creador.mjs";
 import { publicar } from "./chat.mjs";
+import { EditorRetrato, pintarRetratos } from "./retrato.mjs";
 
 const n = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 const signo = v => (v > 0 ? `+${v}` : `${v}`);
@@ -28,7 +29,7 @@ class HojaBase extends ConMemoria(HandlebarsApplicationMixin(ActorSheetV2)) {
     form: { submitOnChange: true },
     window: { resizable: true },
     actions: {
-      editar: HojaBase.#editar, compacto: HojaBase.#compacto,
+      editar: HojaBase.#editar, compacto: HojaBase.#compacto, retrato: HojaBase.#retrato,
       tirar: HojaBase.#tirar, iniciativa: HojaBase.#iniciativa, ataque: HojaBase.#ataque, perseguir: HojaBase.#perseguir,
       saludMas: HojaBase.#saludMas, saludMenos: HojaBase.#saludMenos, saludOtra: HojaBase.#saludOtra,
       itemUsar: HojaBase.#itemUsar, itemEquipar: HojaBase.#itemEquipar, itemChat: HojaBase.#itemChat,
@@ -84,6 +85,7 @@ class HojaBase extends ConMemoria(HandlebarsApplicationMixin(ActorSheetV2)) {
     await super._onRender(context, options);
     this.element.classList.toggle("compacto", this.compacto);
     this.element.classList.toggle("editando", this.editando);
+    pintarRetratos(this.element);
     // Los dados de una habilidad se corrigen con un clic en el pip, solo con el candado abierto.
     for (const b of this.element.querySelectorAll("[data-pip]")) {
       b.addEventListener("click", ev => {
@@ -97,6 +99,7 @@ class HojaBase extends ConMemoria(HandlebarsApplicationMixin(ActorSheetV2)) {
   }
 
   static #editar() { this.editando = !this.editando; this.render(); }
+  static #retrato() { return EditorRetrato.abrir(this.document); }
   static #compacto() { this.alternarCompacto(); }
   static #tirar(ev, b) { return this.document.tirarHabilidad(b.dataset.clave); }
   static #iniciativa() { return this.document.rollInitiative({ createCombatants: true }); }
@@ -136,7 +139,7 @@ export class HojaJubilado extends HojaBase {
     position: { width: 640, height: 740 },
     window: { icon: "fa-solid fa-person-cane" },
     actions: {
-      jamacuco: HojaJubilado.#jamacuco, reforzar: HojaJubilado.#reforzar, reservar: HojaJubilado.#reservar,
+      jamacuco: HojaJubilado.#jamacuco, reforzar: HojaJubilado.#reforzar, quitarRefuerzo: HojaJubilado.#quitarRefuerzo, reservar: HojaJubilado.#reservar,
       yayoMas: HojaJubilado.#yayoMas, yayoMenos: HojaJubilado.#yayoMenos,
       flashback: HojaJubilado.#flashback, menorUsado: HojaJubilado.#menorUsado,
       arquetipo: HojaJubilado.#arquetipo, creador: HojaJubilado.#creador,
@@ -194,6 +197,7 @@ export class HojaJubilado extends HojaBase {
 
   static #jamacuco() { return this.document.tirarJamacuco(); }
   static #reforzar(ev, b) { return this.document.reforzar(b.dataset.valor); }
+  static #quitarRefuerzo(ev, b) { return this.document.update({ [`system.combate.refuerzo${b.dataset.valor === "bemoles" ? "Bemoles" : "Nervio"}`]: 0 }); }
   static #reservar() { return this.document.update({ "system.combate.reservando": !this.document.system.combate.reservando }); }
   static #sorpresa() { return this.document.update({ "system.combate.sorprendido": !this.document.system.combate.sorprendido }); }
   static #yayoMas() { return this.document.ganarYayo(1); }

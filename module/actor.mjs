@@ -470,7 +470,8 @@ export class ActorIMSERSO extends Actor {
     await this.update({
       "system.yayopoints.valor": Math.min(n(s.yayopoints.valor), n(s.yayopoints.inicial)),
       "system.flashback.usado": false, "system.achaques.menorUsado": false,
-      "system.curaciones.sesion": [], "system.estado.cogorza": false
+      "system.curaciones.sesion": [], "system.estado.cogorza": false,
+      "system.combate.refuerzoBemoles": 0, "system.combate.refuerzoNervio": 0, "system.combate.reservando": false
     });
     const usos = this.items.filter(i => i.type === "talento" && i.system.usos.max > 0).map(i => ({ _id: i.id, "system.usos.valor": i.system.usos.max }));
     if (usos.length) await this.updateEmbeddedDocuments("Item", usos);

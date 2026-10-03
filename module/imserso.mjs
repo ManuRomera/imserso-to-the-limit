@@ -9,12 +9,14 @@ import { getAchaque } from "./reglas-data.mjs";
 import { MODELOS_ACTOR, MODELOS_ITEM } from "./modelos.mjs";
 import { ActorIMSERSO } from "./actor.mjs";
 import { ItemIMSERSO } from "./item.mjs";
-import { CombateIMSERSO, CombatanteIMSERSO, alCambiarAsalto, pintarTracker } from "./combate.mjs";
+import { CombateIMSERSO, CombatanteIMSERSO, alCambiarAsalto, alTerminarCombate, pintarTracker } from "./combate.mjs";
 import { HojaJubilado, HojaExtra, HojaObjeto } from "./hojas.mjs";
 import { abrirCreador } from "./creador.mjs";
 import { PanelMinistro, repintarMinistro } from "./ministro.mjs";
 import { escucharChat, publicar } from "./chat.mjs";
 import { lanzarMiedo } from "./flujos.mjs";
+import { registrarAccesibilidad } from "./accesibilidad.mjs";
+import { pintarRetratos, repintarRetratos } from "./retrato.mjs";
 
 Hooks.once("init", () => {
   CONFIG.IMSERSO = IMSERSO;
@@ -35,6 +37,7 @@ Hooks.once("init", () => {
   DocumentSheetConfig.registerSheet(Actor, ID, HojaExtra, { types: ["extra"], makeDefault: true, label: "IMSERSO · Ficha de extra" });
   DocumentSheetConfig.registerSheet(Item, ID, HojaObjeto, { makeDefault: true, label: "IMSERSO · Objeto" });
 
+  registrarAccesibilidad();
   game.settings.register(ID, "yayoCritico", {
     name: "Yayopoint por crítico", hint: "Cada éxito crítico en una tirada de habilidad entrega 1 yayopoint al jubilado (2 con «Carpe diem»). El manual lo limita a tiradas pedidas por el Sr. Ministro: desactívalo si prefieres darlo a mano.",
     scope: "world", config: true, type: Boolean, default: true
@@ -110,8 +113,13 @@ Hooks.on("createActor", (actor, opciones, userId) => {
 });
 
 Hooks.on("updateCombat", alCambiarAsalto);
-Hooks.on("renderCombatTracker", pintarTracker);
-Hooks.on("updateActor", actor => { if (actor.type === "jubilado") repintarMinistro(); });
+Hooks.on("renderCombatTracker", (app, html) => { pintarTracker(app, html); pintarRetratos(html); });
+Hooks.on("deleteCombat", alTerminarCombate);
+Hooks.on("renderActorDirectory", (app, html) => pintarRetratos(html));
+Hooks.on("updateActor", (actor, cambios) => {
+  if (actor.type === "jubilado") repintarMinistro();
+  if (foundry.utils.hasProperty(cambios, `flags.${ID}`) || "img" in cambios) repintarRetratos();
+});
 
 /** Accesos en el directorio de Actores. */
 Hooks.on("renderActorDirectory", (app, html) => {

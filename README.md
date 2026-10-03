@@ -45,6 +45,8 @@ https://github.com/ManuRomera/imserso-to-the-limit/releases/latest/download/syst
 - **Claro y oscuro**, con letra suave y buen contraste.
 - **Modo compacto** (la ficha entera en 330 px, ideal para tener cuatro abiertas) y **candado de edición** para no tocar atributos sin querer.
 - **Las ventanas se acuerdan** de su posición, tamaño, pestaña y modo, por usuario.
+- **Accesibilidad:** icono junto al de cerrar con tamaño de texto, alto contraste, fuente de alta legibilidad, reducir movimiento y ayuda inmediata.
+- **Encuadre del retrato:** elige qué zona de la imagen se ve y con cuánto zoom; se ve igual en la ficha, el panel del Sr. Ministro, el directorio y el combate.
 
 <p align="center">
   <img src="docs/img/compacto.jpg" alt="Ficha en modo compacto" width="35%">

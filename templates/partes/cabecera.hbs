@@ -1,5 +1,5 @@
 <header class="ims-cab">
-  <img class="ims-retrato" src="{{actor.img}}" alt="" data-edit="img" data-action="editImage">
+  {{#if editable}}<button type="button" class="ims-retrato-btn" data-action="retrato" data-tooltip="Encuadre del retrato: elige la zona y el zoom"><img class="ims-retrato" src="{{actor.img}}" alt="" data-retrato="{{actor.id}}"><i class="fa-solid fa-crop-simple" inert></i></button>{{else}}<span class="ims-retrato-btn"><img class="ims-retrato" src="{{actor.img}}" alt="" data-retrato="{{actor.id}}"></span>{{/if}}
   <div class="ims-cab-main">
     <input class="ims-nombre" type="text" name="name" value="{{actor.name}}" placeholder="Nombre" {{#unless editable}}disabled{{/unless}}>
     <p class="ims-sub">{{{sub}}}</p>

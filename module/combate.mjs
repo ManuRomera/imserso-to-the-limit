@@ -54,6 +54,19 @@ export async function alCambiarAsalto(combate, cambios) {
   }
 }
 
+/** Al terminar el combate caducan los refuerzos de yayopoints, reservar acción y la sorpresa. */
+export async function alTerminarCombate(combate) {
+  if (!game.user.isGM) return;
+  for (const c of combate.combatants) {
+    const a = c.actor;
+    if (!a?.system?.combate) continue;
+    const s = a.system.combate;
+    if (s.reservando || s.refuerzoNervio || s.refuerzoBemoles || s.sorprendido) {
+      await a.update({ "system.combate.reservando": false, "system.combate.refuerzoNervio": 0, "system.combate.refuerzoBemoles": 0, "system.combate.sorprendido": false });
+    }
+  }
+}
+
 /** Distintivos en el tracker: acción extra y sorpresa. */
 export function pintarTracker(app, html) {
   const raiz = html instanceof HTMLElement ? html : html[0];

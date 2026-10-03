@@ -2,7 +2,7 @@
   "id": "imserso-to-the-limit",
   "title": "MR- IMSERSO to the limit (YayoSystem)",
   "description": "Sistema no oficial para Foundry VTT de IMSERSO to the limit, el juego de rol de jubilados de viaje con el Imserso (YayoSystem). Fichas de jubilado y extra, tiradas con yayopoints, achaques, Jamacuco, peleas con defensa activa, miedo, persecuciones, curación, arquetipos y asistente de creación. Requiere el manual original. Este paquete no está afiliado, aprobado ni publicado por los autores o titulares de IMSERSO to the limit. El código y los recursos originales del paquete están bajo la licencia indicada en LICENSE.md. Cualquier Open Game Content usado se reproduce bajo los términos de la Open Game License.",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "url": "https://github.com/ManuRomera/imserso-to-the-limit",
   "manifest": "https://github.com/ManuRomera/imserso-to-the-limit/releases/latest/download/system.json",
   "download": "https://github.com/ManuRomera/imserso-to-the-limit/releases/latest/download/imserso-to-the-limit.zip",

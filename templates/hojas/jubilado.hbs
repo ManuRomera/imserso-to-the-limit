@@ -34,11 +34,11 @@
 
     <div class="ims-fijos">
       <div class="ims-fijo" data-tooltip="{{ayuda.bemoles}}">
-        <span class="ims-rotulo">Bemoles</span><b>{{bemoles}}</b>{{#if refuerzoBemoles}}<em>+{{refuerzoBemoles}}</em>{{/if}}
+        <span class="ims-rotulo">Bemoles</span><b>{{bemoles}}</b>{{#if refuerzoBemoles}}<em>+{{refuerzoBemoles}}</em><button type="button" class="ims-mini peligro" data-action="quitarRefuerzo" data-valor="bemoles" data-tooltip="Quitar el refuerzo de yayopoints (dura un turno de combate)"><i class="fa-solid fa-xmark"></i></button>{{/if}}
         {{#if editable}}<button type="button" class="ims-mini" data-action="reforzar" data-valor="bemoles" data-tooltip="Gastar yayopoints: +3 cada uno"><i class="fa-solid fa-capsules"></i></button>{{/if}}
       </div>
       <div class="ims-fijo" data-tooltip="{{ayuda.nervio}}">
-        <span class="ims-rotulo">Nervio</span><b>{{nervio}}</b>{{#if refuerzoNervio}}<em>+{{refuerzoNervio}}</em>{{/if}}
+        <span class="ims-rotulo">Nervio</span><b>{{nervio}}</b>{{#if refuerzoNervio}}<em>+{{refuerzoNervio}}</em><button type="button" class="ims-mini peligro" data-action="quitarRefuerzo" data-valor="nervio" data-tooltip="Quitar el refuerzo de yayopoints (dura un turno de combate)"><i class="fa-solid fa-xmark"></i></button>{{/if}}
         {{#if editable}}<button type="button" class="ims-mini" data-action="reforzar" data-valor="nervio" data-tooltip="Gastar yayopoints: +3 cada uno"><i class="fa-solid fa-capsules"></i></button>{{/if}}
       </div>
       <div class="ims-fijo jamacuco {{#if jamacucoPendiente}}pendiente{{/if}}" data-tooltip="{{ayuda.jamacuco}}">

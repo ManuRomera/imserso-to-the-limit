@@ -9,7 +9,7 @@
   <div class="ims-cuerpo">
     {{#each jubilados}}
     <article class="ims-jub {{#if estados.length}}con-estado{{/if}}">
-      <button type="button" class="ims-jub-img" data-action="abrir" data-id="{{id}}" data-tooltip="Abrir ficha"><img src="{{img}}" alt=""></button>
+      <button type="button" class="ims-jub-img" data-action="abrir" data-id="{{id}}" data-tooltip="Abrir ficha"><img src="{{img}}" alt="" data-retrato="{{id}}"></button>
       <div class="ims-jub-main">
         <b>{{nombre}}</b><small>{{jugador}}</small>
         <div class="ims-barra-mini" role="img" aria-label="Salud {{salud}} de {{max}}"><span style="width: {{pct}}%"></span></div>

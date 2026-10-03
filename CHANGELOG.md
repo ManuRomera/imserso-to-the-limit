@@ -1,5 +1,16 @@
 # Cambios
 
+## 2.1.0
+
+### Nuevo
+- **Accesibilidad**: icono en la cabecera de todas las ventanas del sistema, junto al de cerrar, con tamaño del texto (85–160 %), alto contraste, fuente de alta legibilidad, reducir movimiento y ayuda inmediata. Son ajustes de cada navegador y también están en *Configuración → Ajustes del sistema*.
+- **Encuadre del retrato**: pulsa el retrato de la ficha y elige la zona de la imagen y el zoom (hasta 6×), con vista previa a tres tamaños, ratón, rueda y teclado. Se guarda en el personaje y se ve igual en la ficha, el panel del Sr. Ministro, el directorio de Actores y el *tracker* de combate.
+- **Atributos con nombre completo y abreviatura**: «Gracejo GRA», «Cacumen CAC»…
+- Los refuerzos de Bemoles/Nervio con yayopoints se ven como un `+3` con una ✕ para quitarlos.
+
+### Corregido
+- Los refuerzos de yayopoints solo caducaban al cambiar de asalto dentro de un combate; sin combate se quedaban activos para siempre. Ahora también caducan al terminar el combate y en el fin de sesión, y se pueden quitar a mano desde la ficha.
+
 ## 2.0.0
 
 Reescritura completa sobre la API V2 de Foundry. **Los datos de los mundos existentes se conservan** (mismas rutas `system.*`; los modelos migran solos al cargar) y el módulo «Los Abuelos de la Justicia» sigue funcionando.

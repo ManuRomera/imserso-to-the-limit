@@ -8,6 +8,7 @@ import { RUTA } from "./config.mjs";
 import { publicar } from "./chat.mjs";
 import { lanzarMiedo } from "./flujos.mjs";
 import { pedirDatos, confirmar } from "./dialogos.mjs";
+import { pintarRetratos } from "./retrato.mjs";
 
 const esc = foundry.utils.escapeHTML;
 
@@ -26,6 +27,11 @@ export class PanelMinistro extends ConMemoria(HandlebarsApplicationMixin(Applica
   static PARTS = { cuerpo: { template: `${RUTA}/templates/apps/ministro.hbs`, scrollable: [".ims-cuerpo"] } };
 
   static abrir() { return new PanelMinistro().render({ force: true }); }
+
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    pintarRetratos(this.element);
+  }
 
   async _prepareContext() {
     const jubilados = game.actors.filter(a => a.type === "jubilado").sort((a, b) => a.name.localeCompare(b.name, "es")).map(a => {
