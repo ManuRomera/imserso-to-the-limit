@@ -1,0 +1,34 @@
+<div class="ims-ficha ims-panel">
+  <section class="ims-acciones grande">
+    <button type="button" data-action="miedo" data-tooltip="Tirada de miedo contra los Bemoles de los jubilados marcados"><i class="fa-solid fa-ghost"></i> Miedo</button>
+    <button type="button" data-action="dia" data-tooltip="Vuelven las curaciones «una vez al día»"><i class="fa-solid fa-sun"></i> Nuevo día</button>
+    <button type="button" data-action="sesion"><i class="fa-solid fa-moon"></i> Fin de sesión</button>
+    <button type="button" data-action="aventura"><i class="fa-solid fa-suitcase-rolling"></i> Nueva aventura</button>
+  </section>
+  {{#if pendientes}}<p class="ims-nota aviso"><i class="fa-solid fa-heart-pulse"></i> {{pendientes}} jubilado{{#if (gt pendientes 1)}}s{{/if}} sin su tirada obligatoria de Jamacuco. Fuérzala en el primer momento dramáticamente intenso.</p>{{/if}}
+  <div class="ims-cuerpo">
+    {{#each jubilados}}
+    <article class="ims-jub {{#if estados.length}}con-estado{{/if}}">
+      <button type="button" class="ims-jub-img" data-action="abrir" data-id="{{id}}" data-tooltip="Abrir ficha"><img src="{{img}}" alt=""></button>
+      <div class="ims-jub-main">
+        <b>{{nombre}}</b><small>{{jugador}}</small>
+        <div class="ims-barra-mini" role="img" aria-label="Salud {{salud}} de {{max}}"><span style="width: {{pct}}%"></span></div>
+        <div class="ims-chips">
+          <span class="ims-chip">Salud {{salud}}/{{max}}</span>
+          {{#if penal}}<span class="ims-chip aviso">−{{penal}}D</span>{{/if}}
+          <span class="ims-chip">{{yayos}}/{{inicial}} yayopoints</span>
+          {{#if pendiente}}<span class="ims-chip aviso">Jamacuco pendiente</span>{{/if}}
+          {{#if flashback}}<span class="ims-chip usado">Flasbas usado</span>{{/if}}
+          {{#if menor}}<span class="ims-chip usado">Menor usado</span>{{/if}}
+          {{#each estados}}<span class="ims-chip peligro">{{this}}</span>{{/each}}
+        </div>
+      </div>
+      <div class="ims-jub-bot">
+        <button type="button" class="ims-mini" data-action="premiar" data-id="{{id}}" data-tooltip="Premiar con 1 yayopoint"><i class="fa-solid fa-capsules"></i></button>
+        <button type="button" class="ims-mini" data-action="jamacuco" data-id="{{id}}" data-tooltip="Forzar tirada de Jamacuco"><i class="fa-solid fa-heart-pulse"></i></button>
+      </div>
+    </article>
+    {{/each}}
+    {{#if vacio}}<p class="ims-vacio">Todavía no hay jubilados. Crea uno con el asistente desde el directorio de Actores.</p>{{/if}}
+  </div>
+</div>

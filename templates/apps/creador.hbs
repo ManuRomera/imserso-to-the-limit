@@ -1,0 +1,95 @@
+<div class="ims-ficha ims-asistente">
+  <ol class="ims-pasos">
+    {{#each pasos}}<li class="{{#if activo}}activo{{/if}}{{#if hecho}} hecho{{/if}}"><button type="button" data-action="paso" data-i="{{i}}"><span>{{inc i}}</span>{{etiqueta}}</button></li>{{/each}}
+  </ol>
+
+  <div class="ims-cuerpo">
+    {{#if (eq paso "modo")}}
+    <h2>¿Cómo quieres crear al jubilado?</h2>
+    <div class="ims-metodos">
+      <label class="ims-metodo {{#if (eq e.modo 'libre')}}activo{{/if}}"><input type="radio" name="modo" value="libre" {{checked (eq e.modo "libre")}}><i class="fa-solid fa-pen-ruler"></i><b>Creación libre</b><span>Reparte tú los bonificadores y las habilidades. Sin talento. 5 minutos.</span></label>
+      <label class="ims-metodo {{#if (eq e.modo 'arquetipo')}}activo{{/if}}"><input type="radio" name="modo" value="arquetipo" {{checked (eq e.modo "arquetipo")}}><i class="fa-solid fa-stamp"></i><b>Arquetipo</b><span>Uno de los 14 del manual, ya con talento. 2 minutos.</span></label>
+      <button type="button" class="ims-metodo" data-action="aleatorio"><i class="fa-solid fa-dice"></i><b>Al azar</b><span>Todo tirado con las reglas. Listo para jugar.</span></button>
+    </div>
+    {{#if (eq e.modo "arquetipo")}}
+    <h3 class="ims-seccion">Elige arquetipo</h3>
+    <div class="ims-arquetipos">
+      {{#each arquetipos}}
+      <label class="ims-arq {{#if activo}}activo{{/if}}"><input type="radio" name="arquetipoKey" value="{{key}}" {{checked activo}}>
+        <b>{{name}}</b><small>{{genero}}</small>
+        <span class="ims-chips"><i>CAC {{attrs.cac}}</i><i>GRA {{attrs.gra}}</i><i>PRE {{attrs.pre}}</i><i>ROB {{attrs.rob}}</i></span>
+        <em>{{talentName}}</em></label>
+      {{/each}}
+    </div>
+    {{#if elegido}}<p class="ims-nota"><b>{{elegido.talentName}}.</b> {{elegido.talent}}<br><small>3D: {{elegido.d3t}}. 2D: {{elegido.d2t}}.</small></p>{{/if}}
+    {{/if}}
+    {{/if}}
+
+    {{#if (eq paso "datos")}}
+    <h2>Datos del jubilado</h2>
+    <div class="ims-datos">
+      <label class="ims-campo"><span>Nombre del PJ <small>(del glosario: nada de Hugo ni Jessica)</small></span><input type="text" name="nombre" value="{{e.nombre}}"></label>
+      <label class="ims-campo"><span>Jugador</span><input type="text" name="datos.jugador" value="{{e.datos.jugador}}"></label>
+      <label class="ims-campo"><span>Lugar de nacimiento <small>(un pueblo que dejó de joven)</small></span><input type="text" name="datos.lugarNacimiento" value="{{e.datos.lugarNacimiento}}"></label>
+      <label class="ims-campo"><span>Años <small>(60-65 o más)</small></span><input type="text" name="datos.anos" value="{{e.datos.anos}}"></label>
+      <label class="ims-campo"><span>Antigua profesión <small>(+3)</small></span><input type="text" name="datos.antiguaProfesion" value="{{e.datos.antiguaProfesion}}"></label>
+      <label class="ims-campo"><span>Partido {{#if e.tiradaPartido}}<small>(2D6 = {{e.tiradaPartido}})</small>{{/if}}</span>
+        <span class="ims-fila-sel"><input type="text" name="datos.partido" value="{{e.datos.partido}}" list="ims-p"><datalist id="ims-p">{{#each partidos}}<option value="{{this}}">{{/each}}</datalist><button type="button" data-action="partido"><i class="fa-solid fa-dice"></i> 2D6</button></span></label>
+    </div>
+    <label class="ims-campo"><span>Familia y nietos</span><textarea name="datos.familiaNietos" rows="3">{{e.datos.familiaNietos}}</textarea></label>
+    <label class="ims-campo"><span>Pertenencias</span><textarea name="datos.pertenencias" rows="2">{{e.datos.pertenencias}}</textarea></label>
+    <label class="ims-campo"><span>Vida y milagros</span><textarea name="datos.vidaMilagros" rows="4">{{e.datos.vidaMilagros}}</textarea></label>
+    {{/if}}
+
+    {{#if (eq paso "reglas")}}
+    {{#if libre}}
+    <h2>Bonificadores y habilidades</h2>
+    <p class="ims-nota">Reparte <b>0, +2, +4 y +6</b> una vez cada uno. Elige <b>4 habilidades a 3D</b> y <b>6 a 2D</b>; el resto, 1D.</p>
+    <div class="ims-atributos-crear">
+      {{#each atributos}}<label class="ims-campo"><span>{{label}} ({{short}})</span><select name="atributos.{{k}}">{{#each opciones}}<option value="{{this}}" {{#if (eq this ../valor)}}selected{{/if}}>{{#if this}}+{{this}}{{else}}0{{/if}}</option>{{/each}}</select></label>{{/each}}
+    </div>
+    <p class="ims-contador"><span class="{{#if (eq cuentas.d3 4)}}ok{{/if}}">3D: {{cuentas.d3}}/4</span><span class="{{#if (eq cuentas.d2 6)}}ok{{/if}}">2D: {{cuentas.d2}}/6</span></p>
+    <ul class="ims-hab-crear">
+      {{#each habilidades}}<li><span>{{etiqueta}} <small>{{atr}}</small></span>
+        <select name="habilidades.{{k}}"><option value="1" {{#if (eq dados 1)}}selected{{/if}}>1D</option><option value="2" {{#if (eq dados 2)}}selected{{/if}} {{#if bloq2}}disabled{{/if}}>2D</option><option value="3" {{#if (eq dados 3)}}selected{{/if}} {{#if bloq3}}disabled{{/if}}>3D</option></select></li>{{/each}}
+    </ul>
+    {{else}}
+    <h2>{{c.arq.name}}</h2>
+    <p class="ims-nota">El arquetipo ya trae bonificadores, habilidades, yayopoints, Jamacuco y talento.</p>
+    {{/if}}
+    <div class="ims-derivados">
+      <div><span>Yayopoints</span><b>{{c.yayos}}</b></div><div><span>Bemoles</span><b>{{c.bemoles}}</b></div>
+      <div><span>Nervio</span><b>{{c.nervio}}</b></div><div><span>Jamacuco</span><b>{{c.jamacuco}}</b></div>
+    </div>
+    {{/if}}
+
+    {{#if (eq paso "achaques")}}
+    <h2>Achaques y Salud</h2>
+    <p class="ims-nota">Uno mayor y otro menor, bien distintos (al menos uno puramente físico).</p>
+    <div class="ims-datos">
+      <label class="ims-campo"><span>Achaque mayor</span><input type="text" name="achaques.mayor" value="{{e.achaques.mayor}}"></label>
+      <label class="ims-campo"><span>Achaque menor</span><input type="text" name="achaques.menor" value="{{e.achaques.menor}}"></label>
+    </div>
+    <div class="ims-acciones"><button type="button" data-action="achaques"><i class="fa-solid fa-dice"></i> Achaques al azar (2 × 1D100)</button><button type="button" data-action="salud"><i class="fa-solid fa-heart-pulse"></i> Tirar Salud (1D6)</button></div>
+    <p class="ims-nota">Salud inicial: {{c.saludBase}} + 1D6 {{#if e.tiradaSalud}}({{e.tiradaSalud}}) = <b>{{c.salud}}</b>{{else}}<i>sin tirar</i>{{/if}}</p>
+    {{/if}}
+
+    {{#if (eq paso "resumen")}}
+    <h2>{{#if e.nombre}}{{e.nombre}}{{else}}Sin nombre{{/if}}</h2>
+    <div class="ims-derivados">
+      <div><span>Salud</span><b>{{c.salud}}</b></div><div><span>Yayopoints</span><b>{{c.yayos}}</b></div><div><span>Bemoles</span><b>{{c.bemoles}}</b></div>
+      <div><span>Nervio</span><b>{{c.nervio}}</b></div><div><span>Jamacuco</span><b>{{c.jamacuco}}</b></div>
+    </div>
+    <p class="ims-nota">{{#if c.arq}}<b>{{c.arq.name}}</b>. {{/if}}{{e.datos.antiguaProfesion}} de {{e.datos.lugarNacimiento}}, {{e.datos.anos}}. Partido: {{e.datos.partido}}.</p>
+    <p class="ims-nota"><b>3D:</b> {{resumenHabilidades.d3}}.<br><b>2D:</b> {{resumenHabilidades.d2}}.</p>
+    <p class="ims-nota"><b>Achaque mayor:</b> {{e.achaques.mayor}}. <b>Menor:</b> {{e.achaques.menor}}.</p>
+    {{#if avisos.length}}<ul class="ims-avisos">{{#each avisos}}<li>{{this}}</li>{{/each}}</ul>{{/if}}
+    {{/if}}
+  </div>
+
+  <footer class="ims-pie-crear">
+    <button type="button" data-action="anterior" {{#if primero}}disabled{{/if}}><i class="fa-solid fa-arrow-left"></i> Atrás</button>
+    {{#if ultimo}}<button type="button" class="principal" data-action="aplicar" {{#unless listo}}disabled{{/unless}}><i class="fa-solid fa-check"></i> {{#if @root.actorExistente}}Aplicar a la ficha{{else}}Crear jubilado{{/if}}</button>
+    {{else}}<button type="button" class="principal" data-action="siguiente">Siguiente <i class="fa-solid fa-arrow-right"></i></button>{{/if}}
+  </footer>
+</div>

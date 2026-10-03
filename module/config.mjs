@@ -1,5 +1,8 @@
+export const ID = "imserso-to-the-limit";
+export const RUTA = `systems/${ID}`;
+
 export const IMSERSO = {
-  ID: "imserso-to-the-limit",
+  ID,
   atributos: {
     cac: { label: "Cacumen", short: "CAC" },
     gra: { label: "Gracejo", short: "GRA" },
@@ -12,10 +15,10 @@ export const IMSERSO = {
     batallitas: { label: "Batallitas", atributo: "gra", oposicion: "bemoles" },
     cosasDelCampo: { label: "Cosas del campo", atributo: "pre", oposicion: "" },
     cotilleo: { label: "Cotilleo", atributo: "gra", oposicion: "bemoles" },
-    discusion: { label: "Discusion", atributo: "gra", oposicion: "bemoles" },
+    discusion: { label: "Discusión", atributo: "gra", oposicion: "bemoles" },
     gimnasia: { label: "Gimnasia", atributo: "pre", oposicion: "nervio" },
     ingesta: { label: "Ingesta", atributo: "rob", oposicion: "" },
-    internes: { label: "Internes", atributo: "cac", oposicion: "" },
+    internes: { label: "Internés", atributo: "cac", oposicion: "" },
     lentesProgresivas: { label: "Lentes progresivas", atributo: "cac", oposicion: "nervio" },
     memoria: { label: "Memoria", atributo: "cac", oposicion: "" },
     mulaParda: { label: "Mula parda", atributo: "rob", oposicion: "" },
@@ -29,18 +32,18 @@ export const IMSERSO = {
     tollinas: { label: "Tollinas", atributo: "rob", oposicion: "nervio" }
   },
   dificultades: [
-    { value: 4, label: "4 Facililla" },
+    { value: 4, label: "4 Sencilla" },
     { value: 8, label: "8 Media" },
     { value: 10, label: "10 Complicada" },
-    { value: 12, label: "12 Dificil" },
-    { value: 15, label: "15 Muy dificil" },
+    { value: 12, label: "12 Difícil" },
+    { value: 15, label: "15 Muy difícil" },
     { value: 18, label: "18 Tremenda" },
     { value: 24, label: "24 Imposible de narices" }
   ],
   ataqueTipos: {
     sinArmas: { label: "Sin armas", habilidad: "tollinas", dano: 2, atributo: "rob", iniciativa: 0, apuntar: "1d6" },
     cuerpo: { label: "Arma cuerpo a cuerpo", habilidad: "tollinas", dano: 4, atributo: "rob", iniciativa: 2, apuntar: "1d6" },
-    fuegoPequena: { label: "Arma de fuego pequena", habilidad: "petanca", dano: 7, atributo: "pre", iniciativa: 5, apuntar: "2d6" },
+    fuegoPequena: { label: "Arma de fuego pequeña", habilidad: "petanca", dano: 7, atributo: "pre", iniciativa: 5, apuntar: "2d6" },
     fuegoGrande: { label: "Arma de fuego grande", habilidad: "petanca", dano: 10, atributo: "pre", iniciativa: 5, apuntar: "2d6" }
   },
   saludUmbrales: [15, 10, 6, 3, 1]

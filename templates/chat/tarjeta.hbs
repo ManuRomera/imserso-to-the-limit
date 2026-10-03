@@ -1,0 +1,34 @@
+<div class="imserso ims-tc ims-tono-{{tono}}">
+  <header class="ims-tc-cabecera">
+    {{#if img}}<img class="ims-tc-img" src="{{img}}" alt="">{{/if}}
+    <div class="ims-tc-rotulo">
+      <span class="ims-cinta">{{#if icono}}<i class="{{icono}}"></i> {{/if}}{{etiqueta}}</span>
+      {{#if subtitulo}}<span class="ims-tc-sub">{{subtitulo}}</span>{{/if}}
+    </div>
+    {{#if resultado}}<span class="ims-tc-resultado">{{resultado}}</span>{{/if}}
+  </header>
+
+  {{#if titulo}}<h3 class="ims-tc-titulo">{{titulo}}</h3>{{/if}}
+
+  {{#if conTotal}}
+  <div class="ims-tc-tirada" aria-label="Total {{total}}">
+    {{#if dados.length}}<span class="ims-dados">{{#each dados}}<span class="ims-dado ims-dado-{{c}}{{#if seis}} seis{{/if}}">{{v}}</span>{{/each}}</span>{{else}}<span class="ims-dados sin">Sin dados: solo el bonificador</span>{{/if}}
+    <span class="ims-total">{{total}}<small>{{#if dificultad}} / {{dificultad}}{{/if}}</small></span>
+  </div>
+  {{#if formula}}<p class="ims-tc-formula">{{formula}}</p>{{/if}}
+  {{/if}}
+
+  {{#if texto}}<p class="ims-tc-texto">{{texto}}</p>{{/if}}
+  {{#each lineas}}<p class="ims-tc-linea">{{#if icono}}<i class="{{icono}}"></i> {{/if}}{{{texto}}}</p>{{/each}}
+
+  {{#if botones}}
+  <footer class="ims-tc-botones">
+    {{#each botones}}
+    <button type="button" class="ims-boton {{#if principal}}principal{{/if}}" data-ims-accion="{{accion}}" data-quien="{{quien}}" {{{attrs}}}>
+      {{#if icono}}<i class="{{icono}}"></i> {{/if}}{{etiqueta}}
+    </button>
+    {{/each}}
+  </footer>
+  {{/if}}
+  {{#if pie}}<p class="ims-tc-pie">{{pie}}</p>{{/if}}
+</div>

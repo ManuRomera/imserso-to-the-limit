@@ -1,0 +1,11 @@
+<header class="ims-cab">
+  <img class="ims-retrato" src="{{actor.img}}" alt="" data-edit="img" data-action="editImage">
+  <div class="ims-cab-main">
+    <input class="ims-nombre" type="text" name="name" value="{{actor.name}}" placeholder="Nombre" {{#unless editable}}disabled{{/unless}}>
+    <p class="ims-sub">{{{sub}}}</p>
+  </div>
+  <div class="ims-cab-botones">
+    {{#if editable}}<button type="button" class="ims-ico {{#if editando}}activo{{/if}}" data-action="editar" data-tooltip="{{#if editando}}Bloquear la ficha{{else}}Desbloquear para editar atributos, dados y valores{{/if}}"><i class="fa-solid {{#if editando}}fa-lock-open{{else}}fa-lock{{/if}}"></i></button>{{/if}}
+    <button type="button" class="ims-ico" data-action="compacto" data-tooltip="Modo compacto"><i class="fa-solid {{#if compacto}}fa-expand{{else}}fa-compress{{/if}}"></i></button>
+  </div>
+</header>

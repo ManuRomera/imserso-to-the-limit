@@ -1,28 +1,37 @@
 {
   "id": "imserso-to-the-limit",
-  "title": "YayoSystem (no oficial)",
-  "description": "Sistema no oficial para Foundry VTT. Requiere el manual original. Este paquete no está afiliado, aprobado ni publicado por los autores o titulares de IMSERSO to the limit. El código y los recursos originales del paquete están bajo la licencia indicada en LICENSE.md. Cualquier Open Game Content usado se reproduce bajo los términos de la Open Game License.",
-  "version": "1.0.5",
+  "title": "MR- IMSERSO to the limit (YayoSystem)",
+  "description": "Sistema no oficial para Foundry VTT de IMSERSO to the limit, el juego de rol de jubilados de viaje con el Imserso (YayoSystem). Fichas de jubilado y extra, tiradas con yayopoints, achaques, Jamacuco, peleas con defensa activa, miedo, persecuciones, curación, arquetipos y asistente de creación. Requiere el manual original. Este paquete no está afiliado, aprobado ni publicado por los autores o titulares de IMSERSO to the limit. El código y los recursos originales del paquete están bajo la licencia indicada en LICENSE.md. Cualquier Open Game Content usado se reproduce bajo los términos de la Open Game License.",
+  "version": "2.0.0",
   "url": "https://github.com/ManuRomera/imserso-to-the-limit",
-  "manifest": "https://raw.githubusercontent.com/ManuRomera/imserso-to-the-limit/main/system.json",
-  "download": "https://github.com/ManuRomera/imserso-to-the-limit/archive/refs/heads/main.zip",
+  "manifest": "https://github.com/ManuRomera/imserso-to-the-limit/releases/latest/download/system.json",
+  "download": "https://github.com/ManuRomera/imserso-to-the-limit/releases/latest/download/imserso-to-the-limit.zip",
   "background": "systems/imserso-to-the-limit/assets/imserso-to-the-limit.webp",
   "media": [
     {
-      "type": "cover",
+      "type": "setup",
       "url": "systems/imserso-to-the-limit/assets/imserso-to-the-limit.webp"
     }
   ],
   "license": "LICENSE.md",
-  "readme": "README.md",
+  "readme": "https://github.com/ManuRomera/imserso-to-the-limit#readme",
   "compatibility": {
-    "minimum": "11",
-    "verified": "13",
-    "maximum": "13"
+    "minimum": "13",
+    "verified": "13.351"
   },
   "authors": [
     {
-      "name": "Manu Romera"
+      "name": "Ignacio Sánchez Aranda · Grupo Creativo Walhalla / Rolecat",
+      "flags": {
+        "rol": "Juego original IMSERSO to the limit y YayoSystem"
+      }
+    },
+    {
+      "name": "Manu Romera",
+      "url": "https://github.com/ManuRomera",
+      "flags": {
+        "rol": "Implementación para Foundry VTT"
+      }
     }
   ],
   "esmodules": [
@@ -50,14 +59,60 @@
       "arquetipo": {}
     }
   },
-  "packs": [],
-  "primaryTokenAttribute": "salud.valor",
+  "packs": [
+    {
+      "name": "arquetipos-objetos",
+      "label": "IMSERSO · Arquetipos de jubilado",
+      "path": "packs/arquetipos-objetos",
+      "type": "Item",
+      "system": "imserso-to-the-limit",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "reglas-diarios",
+      "label": "IMSERSO · Reglas y ayudas",
+      "path": "packs/reglas-diarios",
+      "type": "JournalEntry",
+      "system": "imserso-to-the-limit",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "achaques",
+      "label": "IMSERSO · Lista de 100 achaques",
+      "path": "packs/achaques",
+      "type": "RollTable",
+      "system": "imserso-to-the-limit",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "primaryTokenAttribute": "salud",
   "secondaryTokenAttribute": "yayopoints.valor",
   "grid": {
     "distance": 1,
     "units": "m"
   },
-  "socket": false,
-  "template": "template.json",
-  "initiative": "1d6 + @atributos.pre"
+  "socket": true,
+  "changelog": "https://github.com/ManuRomera/imserso-to-the-limit/blob/main/CHANGELOG.md",
+  "bugs": "https://github.com/ManuRomera/imserso-to-the-limit/issues",
+  "packFolders": [
+    {
+      "name": "MR- IMSERSO to the limit",
+      "sorting": "m",
+      "color": "#4f9a55",
+      "packs": [
+        "arquetipos-objetos",
+        "reglas-diarios",
+        "achaques"
+      ]
+    }
+  ]
 }

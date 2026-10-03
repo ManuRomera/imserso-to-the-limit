@@ -1,0 +1,56 @@
+<div class="ims-ficha ims-ficha-objeto">
+  <header class="ims-cab">
+    <img class="ims-retrato" src="{{item.img}}" alt="" data-edit="img" data-action="editImage">
+    <div class="ims-cab-main">
+      <input class="ims-nombre" type="text" name="name" value="{{item.name}}" {{#unless editable}}disabled{{/unless}}>
+      <p class="ims-sub">{{localize (concat "TYPES.Item." tipo)}}</p>
+    </div>
+    <div class="ims-cab-botones">
+      <button type="button" class="ims-ico" data-action="usar" data-tooltip="Usar"><i class="fa-solid fa-dice-six"></i></button>
+      <button type="button" class="ims-ico" data-action="chat" data-tooltip="Mostrar en el chat"><i class="fa-solid fa-comment"></i></button>
+    </div>
+  </header>
+  <div class="ims-cuerpo">
+    {{#if (eq tipo "arma")}}
+    <div class="ims-datos">
+      <label class="ims-campo"><span>Tipo de ataque</span><select name="system.tipo">{{selectOptions tiposAtaque selected=system.tipo valueAttr="valor" labelAttr="etiqueta"}}</select></label>
+      <label class="ims-campo"><span>Habilidad</span><select name="system.habilidad">{{selectOptions habilidadesArma selected=system.habilidad valueAttr="valor" labelAttr="etiqueta"}}</select></label>
+      <label class="ims-campo"><span>Atributo que suma al daño</span><select name="system.atributoDano">{{selectOptions atributosOpc selected=system.atributoDano valueAttr="valor" labelAttr="etiqueta"}}</select></label>
+      <label class="ims-campo"><span>Daño base</span><input type="number" name="system.danoBase" value="{{system.danoBase}}" min="0"></label>
+      <label class="ims-campo"><span>Bonificador de iniciativa</span><input type="number" name="system.iniciativa" value="{{system.iniciativa}}" min="0"></label>
+      <label class="ims-check"><input type="checkbox" name="system.equipado" {{checked system.equipado}}> Equipada</label>
+    </div>
+    {{/if}}
+    {{#if (eq tipo "talento")}}
+    <div class="ims-datos">
+      <label class="ims-campo"><span>Usos restantes</span><input type="number" name="system.usos.valor" value="{{system.usos.valor}}" min="0"></label>
+      <label class="ims-campo"><span>Usos por partida <small>(0 = sin límite)</small></span><input type="number" name="system.usos.max" value="{{system.usos.max}}" min="0"></label>
+      <label class="ims-campo"><span>Habilidad de uso</span><select name="system.habilidadUso">{{selectOptions habilidades selected=system.habilidadUso valueAttr="valor" labelAttr="etiqueta"}}</select></label>
+      <label class="ims-campo"><span>Dificultad</span><input type="number" name="system.dificultadUso" value="{{system.dificultadUso}}" min="0"></label>
+    </div>
+    {{/if}}
+    {{#if (eq tipo "equipo")}}
+    <div class="ims-datos">
+      <label class="ims-campo"><span>Cantidad</span><input type="number" name="system.cantidad" value="{{system.cantidad}}" min="0"></label>
+      <label class="ims-campo"><span>Uso</span><input type="text" name="system.uso" value="{{system.uso}}"></label>
+      <label class="ims-campo"><span>Habilidad de uso</span><select name="system.habilidadUso">{{selectOptions habilidades selected=system.habilidadUso valueAttr="valor" labelAttr="etiqueta"}}</select></label>
+      <label class="ims-campo"><span>Dificultad</span><input type="number" name="system.dificultadUso" value="{{system.dificultadUso}}" min="0"></label>
+      <label class="ims-campo"><span>Automatismo</span><select name="system.automatismo">{{selectOptions automatismos selected=system.automatismo valueAttr="valor" labelAttr="etiqueta"}}</select></label>
+      <label class="ims-check"><input type="checkbox" name="system.equipado" {{checked system.equipado}}> Equipado</label>
+    </div>
+    {{/if}}
+    {{#if (eq tipo "arquetipo")}}
+    <div class="ims-datos">
+      <label class="ims-campo"><span>Clave</span><input type="text" name="system.arquetipoKey" value="{{system.arquetipoKey}}"></label>
+      <label class="ims-campo"><span>Género</span><input type="text" name="system.genero" value="{{system.genero}}"></label>
+      <label class="ims-campo"><span>Partido</span><input type="text" name="system.partido" value="{{system.partido}}"></label>
+      <label class="ims-campo"><span>Yayopoints</span><input type="number" name="system.yayopoints" value="{{system.yayopoints}}" min="0"></label>
+      <label class="ims-campo"><span>Salud base (ROB×2+10)</span><input type="number" name="system.saludBase" value="{{system.saludBase}}" min="0"></label>
+      <label class="ims-campo"><span>Jamacuco</span><input type="number" name="system.jamacuco" value="{{system.jamacuco}}" min="0"></label>
+      <label class="ims-campo"><span>Talento</span><input type="text" name="system.talentoNombre" value="{{system.talentoNombre}}"></label>
+    </div>
+    <label class="ims-campo"><span>Texto del talento</span><textarea name="system.talento" rows="2">{{system.talento}}</textarea></label>
+    {{/if}}
+    <label class="ims-campo"><span>Descripción</span><textarea name="system.descripcion" rows="6">{{system.descripcion}}</textarea></label>
+  </div>
+</div>

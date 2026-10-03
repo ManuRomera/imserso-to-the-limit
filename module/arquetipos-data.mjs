@@ -1,4 +1,8 @@
 import { defaultSkills } from "./config.mjs";
+import { TALENTOS } from "./reglas.mjs";
+
+/** Talentos «una vez por partida» llevan 1 uso; los que siempre están activos (o se marcan al tirar), ninguno. */
+const usosDe = nombre => (["mas3", "pasivo", "dulce", "ojo"].includes(TALENTOS[nombre]?.tipo) ? 0 : 1);
 
 function skills(d3 = [], d2 = []) {
   const out = defaultSkills(1);
@@ -232,6 +236,7 @@ export function archetypeSystem(arquetipo, healthRoll = 4) {
   const salud = arquetipo.saludBase + healthRoll;
   return {
     "system.datos.arquetipo": arquetipo.name,
+    "system.datos.arquetipoKey": arquetipo.key,
     "system.datos.talento": `${arquetipo.talentName}. ${arquetipo.talent}`,
     "system.datos.partido": arquetipo.partido,
     "system.atributos": arquetipo.attrs,
@@ -253,7 +258,7 @@ export function archetypeTalentItem(arquetipo) {
     img: "icons/svg/d20-grey.svg",
     system: {
       descripcion: arquetipo.talent,
-      usos: { valor: 1, max: 1 },
+      usos: { valor: usosDe(arquetipo.talentName), max: usosDe(arquetipo.talentName) },
       equipado: false,
       automatismo: ""
     }

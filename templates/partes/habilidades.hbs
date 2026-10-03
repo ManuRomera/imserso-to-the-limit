@@ -1,0 +1,21 @@
+      <div class="ims-grupos">
+  {{#each atributos}}
+  <article class="ims-grupo attr-{{clave}}">
+    <header>
+      <span class="siglas" data-tooltip="{{label}}">{{short}}</span>
+      {{#if @root.editando}}<input type="number" name="system.atributos.{{clave}}" value="{{base}}" step="1" aria-label="Bonificador de {{label}}">{{else}}<b class="bono">{{bonoTexto}}</b>{{/if}}
+    </header>
+    <ul>
+      {{#each habilidades}}
+      <li>
+        <button type="button" class="ims-hab" data-action="tirar" data-clave="{{clave}}" data-tooltip="{{ayuda}}">
+          <span class="nom"><span class="n">{{etiqueta}}</span>{{#if oposicion}}<em class="opo" data-tooltip="Se tira contra {{oposicion}} del otro personaje">{{oposicionCorta}}</em>{{/if}}</span>
+          <span class="pips">{{#each pips}}<i class="pip {{#if activo}}on{{/if}}{{#if extra}} extra{{/if}}" data-pip data-habilidad="{{../clave}}" data-valor="{{i}}"></i>{{/each}}</span>
+          <span class="tot">{{total}}</span>
+        </button>
+      </li>
+      {{/each}}
+    </ul>
+  </article>
+  {{/each}}
+</div>

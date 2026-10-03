@@ -1,0 +1,58 @@
+<div class="ims-ficha">
+  {{> "systems/imserso-to-the-limit/templates/partes/cabecera.hbs"}}
+
+  <section class="ims-vitales">
+    <div class="ims-tarjeta ims-salud">
+      <div class="ims-tarjeta-cab"><span class="ims-rotulo">Salud</span><span class="ims-chip">Sin penalizadores</span></div>
+      <div class="ims-salud-num">
+        {{#if editable}}<button type="button" class="ims-mini" data-action="saludMenos" aria-label="Pierde 1 de Salud">−</button>{{/if}}
+        <span class="ims-grande">
+          {{#if editando}}<input type="number" name="system.salud.valor" value="{{system.salud.valor}}" min="0">/<input type="number" name="system.salud.max" value="{{system.salud.max}}" min="1">{{else}}<b>{{system.salud.valor}}</b><small>/ {{system.salud.max}}</small>{{/if}}
+        </span>
+        {{#if editable}}<button type="button" class="ims-mini" data-action="saludMas" aria-label="Recupera 1 de Salud">+</button>
+        <button type="button" class="ims-mini" data-action="saludOtra"><i class="fa-solid fa-ellipsis"></i></button>{{/if}}
+      </div>
+    </div>
+    <div class="ims-fijos">
+      <div class="ims-fijo"><span class="ims-rotulo">Bemoles</span>
+        {{#if editando}}<input type="number" name="system.bemoles.valor" value="{{system.bemoles.valor}}"><label class="auto"><input type="checkbox" name="system.bemoles.manual" {{checked system.bemoles.manual}}> manual</label>{{else}}<b>{{bemoles}}</b>{{/if}}</div>
+      <div class="ims-fijo"><span class="ims-rotulo">Nervio</span>
+        {{#if editando}}<input type="number" name="system.nervio.valor" value="{{system.nervio.valor}}"><label class="auto"><input type="checkbox" name="system.nervio.manual" {{checked system.nervio.manual}}> manual</label>{{else}}<b>{{nervio}}</b>{{/if}}</div>
+    </div>
+  </section>
+
+  <section class="ims-ataque-extra">
+    <div class="ims-datos">
+      <label class="ims-campo"><span>Ataque</span><input type="text" name="system.ataque.nombre" value="{{system.ataque.nombre}}"></label>
+      <label class="ims-campo"><span>Tipo</span><select name="system.ataque.tipo">{{selectOptions ataquesTipos selected=system.ataque.tipo valueAttr="valor" labelAttr="etiqueta"}}</select></label>
+      <label class="ims-campo"><span>Habilidad</span><select name="system.ataque.habilidad">{{selectOptions habilidadesOpc selected=system.ataque.habilidad valueAttr="valor" labelAttr="etiqueta"}}</select></label>
+      <label class="ims-campo"><span>Daño base</span><input type="number" name="system.ataque.dano" value="{{system.ataque.dano}}" min="0"></label>
+    </div>
+    {{#if editable}}
+    <div class="ims-acciones">
+      <button type="button" data-action="iniciativa"><i class="fa-solid fa-forward"></i> Iniciativa</button>
+      <button type="button" data-action="ataque"><i class="fa-solid fa-burst"></i> Atacar</button>
+      <button type="button" data-action="sorpresa" class="{{#if system.combate.sorprendido}}activo{{/if}}"><i class="fa-solid fa-eye-slash"></i> Sorprendido</button>
+      {{#if esGM}}<button type="button" data-action="aleatorio" data-tooltip="Genera un extra al azar"><i class="fa-solid fa-dice"></i> Al azar</button>{{/if}}
+    </div>
+    {{/if}}
+  </section>
+
+  <div class="ims-cuerpo">
+    <p class="ims-nota">Los extras no tiran por Sigilo o Psicología: el jugador tira contra su Nervio o sus Bemoles. Los extras no sufren penalizadores por perder Salud.</p>
+    {{> "systems/imserso-to-the-limit/templates/partes/habilidades.hbs"}}
+    <div class="ims-datos">
+      <label class="ims-campo"><span>Rol</span><input type="text" name="system.rol" value="{{system.rol}}"></label>
+      <label class="ims-campo"><span>Bando</span><input type="text" name="system.bando" value="{{system.bando}}"></label>
+    </div>
+    <label class="ims-campo"><span>Descripción</span><textarea name="system.descripcion" rows="3">{{system.descripcion}}</textarea></label>
+    <label class="ims-campo"><span>Notas del Sr. Ministro</span><textarea name="system.notas" rows="3">{{system.notas}}</textarea></label>
+    {{#if grupos.arma.length}}
+    <h3 class="ims-seccion">Armas</h3>
+    <ul class="ims-objetos">
+      {{#each grupos.arma}}<li class="{{#if equipado}}equipado{{/if}}" data-item-id="{{id}}"><img src="{{img}}" alt=""><span class="nom">{{nombre}}<small>{{sub}}</small></span>
+        <span class="bot"><button type="button" class="ims-mini" data-action="itemUsar"><i class="fa-solid fa-dice-six"></i></button><button type="button" class="ims-mini {{#if equipado}}activo{{/if}}" data-action="itemEquipar"><i class="fa-solid fa-shirt"></i></button><button type="button" class="ims-mini" data-action="itemEditar"><i class="fa-solid fa-pen"></i></button></span></li>{{/each}}
+    </ul>
+    {{/if}}
+  </div>
+</div>
