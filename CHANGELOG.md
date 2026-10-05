@@ -1,5 +1,9 @@
 # Cambios
 
+## 2.1.1
+
+- Añadido el botón «Créditos» en los ajustes del paquete (Manu Romera · Digital RPG Design). No cambia el juego.
+
 ## 2.1.0
 
 ### Nuevo
