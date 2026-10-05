@@ -1,6 +1,6 @@
 {
   "name": "imserso-to-the-limit",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": true,
   "type": "module",
   "description": "IMSERSO to the limit (YayoSystem): sistema no oficial para Foundry VTT 13+.",
